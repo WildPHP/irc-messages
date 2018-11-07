@@ -9,13 +9,16 @@
 
 namespace WildPHP\Messages;
 
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+
 /**
  * Class PASS
  * @package WildPHP\Messages
  *
  * Syntax: PASS password
  */
-class Pass extends BaseIRCMessage implements SendableMessage
+class Pass extends BaseIRCMessage implements OutgoingMessageInterface
 {
     protected static $verb = 'PASS';
 

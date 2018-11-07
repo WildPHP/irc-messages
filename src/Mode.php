@@ -8,8 +8,11 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
@@ -21,7 +24,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  * Syntax (user): prefix MODE nickname flags
  * Syntax (channel): prefix MODE #channel flags [arguments]
  */
-class Mode extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Mode extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
     use NicknameTrait;
@@ -61,20 +64,20 @@ class Mode extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $prefix = UserPrefix::fromIncomingIrcMessage($incomingIrcMessage);
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $target = array_shift($args);
         $flags = array_shift($args);
 

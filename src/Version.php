@@ -8,6 +8,8 @@
 
 namespace WildPHP\Messages;
 
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ServerTrait;
 
 /**
@@ -16,7 +18,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: VERSION [server]
  */
-class Version extends BaseIRCMessage implements SendableMessage
+class Version extends BaseIRCMessage implements OutgoingMessageInterface
 {
     protected static $verb = 'VERSION';
 

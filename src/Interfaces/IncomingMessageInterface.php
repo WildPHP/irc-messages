@@ -7,10 +7,10 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages;
+namespace WildPHP\Messages\Interfaces;
 
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
 
 /**
  * Interface ReceivableMessage
@@ -18,14 +18,14 @@ use WildPHP\Core\Connection\IncomingIrcMessage;
  *
  * A syntax sample is included with all supported messages.
  */
-interface ReceivableMessage
+interface IncomingMessageInterface
 {
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return mixed
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage);
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage);
 
     /**
      * @return string

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2018 The WildPHP Team
+  ~
+  ~ You should have received a copy of the MIT license with the project.
+  ~ See the LICENSE file for more information.
+  -->
+
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="money">
@@ -8,9 +15,9 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src/</directory>
-            <exclude>
-                <file>src/bootstrap.php</file>
-            </exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-clover" target="/tmp/coverage.xml" />
+    </logging>
 </phpunit>

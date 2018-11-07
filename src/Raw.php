@@ -8,13 +8,16 @@
 
 namespace WildPHP\Messages;
 
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+
 /**
  * Class RAW
  * @package WildPHP\Messages
  *
  * Syntax: prefix RAW nickname/channel options
  */
-class Raw extends BaseIRCMessage implements SendableMessage
+class Raw extends BaseIRCMessage implements OutgoingMessageInterface
 {
     /**
      * @var string

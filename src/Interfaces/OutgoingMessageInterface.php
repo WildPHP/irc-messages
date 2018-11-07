@@ -6,10 +6,10 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages;
+namespace WildPHP\Messages\Interfaces;
 
 
-interface SendableMessage
+interface OutgoingMessageInterface
 {
     /**
      * @return string

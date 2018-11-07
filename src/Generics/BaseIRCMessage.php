@@ -6,7 +6,7 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages;
+namespace WildPHP\Messages\Generics;
 
 
 abstract class BaseIRCMessage

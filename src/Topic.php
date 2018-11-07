@@ -9,8 +9,11 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
@@ -21,7 +24,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix TOPIC channel :topic
  */
-class Topic extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Topic extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'TOPIC';
 
@@ -40,19 +43,18 @@ class Topic extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $prefix = UserPrefix::fromIncomingIrcMessage($incomingIrcMessage);
-        $args = $incomingIrcMessage->getArgs();
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
+        $args = $incomingMessage->getArgs();
         $channel = array_shift($args);
         $message = array_shift($args);
 

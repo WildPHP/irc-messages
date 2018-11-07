@@ -10,8 +10,11 @@
 namespace WildPHP\Messages;
 
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
@@ -23,7 +26,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  * Syntax (regular): prefix JOIN #channel
  * Syntax (sender): JOIN #channels [keys]
  */
-class Join extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Join extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use Traits\ChannelsTrait;
     use NicknameTrait;
@@ -32,7 +35,7 @@ class Join extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     /**
      * @var string
      */
-    protected static $verb = 'Join';
+    protected static $verb = 'JOIN';
 
     /**
      * @var string
@@ -74,19 +77,18 @@ class Join extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $prefix = UserPrefix::fromIncomingIrcMessage($incomingIrcMessage);
-        $args = $incomingIrcMessage->getArgs();
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
+        $args = $incomingMessage->getArgs();
         $channel = $args[0];
         $ircAccount = $args[1] ?? '';
         $realname = $args[2] ?? '';

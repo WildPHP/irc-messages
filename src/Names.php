@@ -8,6 +8,8 @@
 
 namespace WildPHP\Messages;
 
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ServerTrait;
 
 /**
@@ -16,7 +18,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: NAMES [channel](,[channel],...) ([server])
  */
-class Names extends BaseIRCMessage implements SendableMessage
+class Names extends BaseIRCMessage implements OutgoingMessageInterface
 {
     protected static $verb = 'NAMES';
 

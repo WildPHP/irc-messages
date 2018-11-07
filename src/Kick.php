@@ -10,8 +10,11 @@
 namespace WildPHP\Messages;
 
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
@@ -23,7 +26,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix KICK #channel nickname :message
  */
-class Kick extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Kick extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use ChannelTrait;
     use PrefixTrait;
@@ -52,20 +55,19 @@ class Kick extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $prefix = UserPrefix::fromIncomingIrcMessage($incomingIrcMessage);
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $channel = $args[0];
         $target = $args[1];
         $message = $args[2];

@@ -9,7 +9,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 
 /**
  * Class USER
@@ -17,7 +20,7 @@ use WildPHP\Core\Connection\IncomingIrcMessage;
  *
  * Syntax: prefix USER username hostname servername realname
  */
-class User extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class User extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'USER';
 
@@ -58,18 +61,18 @@ class User extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $username = array_shift($args);
         $hostname = array_shift($args);
         $servername = array_shift($args);

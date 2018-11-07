@@ -9,7 +9,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 
 /**
  * Class Authenticate
@@ -18,7 +21,7 @@ use WildPHP\Core\Connection\IncomingIrcMessage;
  * Syntax: AUTHENTICATE response
  * @TODO look into the documentation
  */
-class Authenticate extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Authenticate extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'AUTHENTICATE';
 
@@ -38,17 +41,16 @@ class Authenticate extends BaseIRCMessage implements ReceivableMessage, Sendable
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
-        $response = $incomingIrcMessage->getArgs()[0];
+        $response = $incomingMessage->getArgs()[0];
 
         $object = new self($response);
 

@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages\RPL;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Messages\BaseIRCMessage;
-use WildPHP\Messages\ReceivableMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\ServerTrait;
@@ -21,7 +21,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: :server 005 nickname VARIABLE[=key] VARIABLE[=key] ... :greeting
  */
-class ISupport extends BaseIRCMessage implements ReceivableMessage
+class ISupport extends BaseIRCMessage implements IncomingMessageInterface
 {
     use NicknameTrait;
     use ServerTrait;
@@ -32,20 +32,19 @@ class ISupport extends BaseIRCMessage implements ReceivableMessage
     protected $variables = [];
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $nickname = array_shift($args);
-        $server = $incomingIrcMessage->getPrefix();
+        $server = $incomingMessage->getPrefix();
         $message = array_pop($args);
 
         $variables = [];

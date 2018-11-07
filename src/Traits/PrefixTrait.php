@@ -9,27 +9,27 @@
 namespace WildPHP\Messages\Traits;
 
 
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\Prefix;
 
 trait PrefixTrait
 {
     /**
-     * @var UserPrefix
+     * @var Prefix
      */
     protected $prefix = null;
 
     /**
-     * @return UserPrefix
+     * @return Prefix
      */
-    public function getPrefix(): UserPrefix
+    public function getPrefix(): Prefix
     {
         return $this->prefix;
     }
 
     /**
-     * @param UserPrefix $prefix
+     * @param Prefix $prefix
      */
-    public function setPrefix(UserPrefix $prefix)
+    public function setPrefix(Prefix $prefix)
     {
         $this->prefix = $prefix;
     }

@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages\RPL;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Messages\BaseIRCMessage;
-use WildPHP\Messages\ReceivableMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
@@ -22,7 +22,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax (as used by WildPHP): :server 354 ownnickname username hostname nickname status accountname
  */
-class WhosPcRpl extends BaseIRCMessage implements ReceivableMessage
+class WhosPcRpl extends BaseIRCMessage implements IncomingMessageInterface
 {
     use NicknameTrait;
     use ChannelTrait;
@@ -57,19 +57,18 @@ class WhosPcRpl extends BaseIRCMessage implements ReceivableMessage
     protected $accountname = '';
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $server = $incomingIrcMessage->getPrefix();
-        $args = $incomingIrcMessage->getArgs();
+        $server = $incomingMessage->getPrefix();
+        $args = $incomingMessage->getArgs();
         $ownNickname = array_shift($args);
         $username = array_shift($args);
         $hostname = array_shift($args);

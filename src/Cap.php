@@ -8,8 +8,11 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Core\Connection\UserPrefix;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
@@ -19,7 +22,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix CAP nickname command [:capabilities]
  */
-class Cap extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Cap extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
     use NicknameTrait;
@@ -53,19 +56,18 @@ class Cap extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $prefix = UserPrefix::fromIncomingIrcMessage($incomingIrcMessage);
-        $args = $incomingIrcMessage->getArgs();
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
+        $args = $incomingMessage->getArgs();
         $nickname = array_shift($args);
         $command = array_shift($args);
         $capabilities = explode(' ', array_shift($args));

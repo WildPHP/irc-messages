@@ -8,7 +8,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 
 /**
  * Class PING
@@ -16,7 +19,7 @@ use WildPHP\Core\Connection\IncomingIrcMessage;
  *
  * Syntax: PING server1 [server2]
  */
-class Ping extends BaseIRCMessage implements ReceivableMessage, SendableMessage
+class Ping extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'PING';
 
@@ -37,18 +40,17 @@ class Ping extends BaseIRCMessage implements ReceivableMessage, SendableMessage
     }
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
-     * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $server1 = $args[0];
         $server2 = $args[1] ?? '';
 

@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages\RPL;
 
-use WildPHP\Core\Connection\IncomingIrcMessage;
-use WildPHP\Messages\BaseIRCMessage;
-use WildPHP\Messages\ReceivableMessage;
+use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
@@ -21,7 +21,7 @@ use WildPHP\Messages\Traits\NicknameTrait;
  *
  * Syntax: :server 366 nickname #channel :End of /NAMES list.
  */
-class EndOfNames extends BaseIRCMessage implements ReceivableMessage
+class EndOfNames extends BaseIRCMessage implements IncomingMessageInterface
 {
     use NicknameTrait;
     use ChannelTrait;
@@ -30,18 +30,18 @@ class EndOfNames extends BaseIRCMessage implements ReceivableMessage
     protected static $verb = '366';
 
     /**
-     * @param IncomingIrcMessage $incomingIrcMessage
+     * @param IncomingMessage $incomingMessage
      *
      * @return \self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingIrcMessage(IncomingIrcMessage $incomingIrcMessage): self
+    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
-        if ($incomingIrcMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingIrcMessage->getVerb());
+        if ($incomingMessage->getVerb() != self::getVerb()) {
+            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingIrcMessage->getArgs();
+        $args = $incomingMessage->getArgs();
         $nickname = array_shift($args);
         $channel = array_shift($args);
         $message = array_shift($args);
