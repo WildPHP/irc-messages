@@ -100,7 +100,7 @@ class Prefix
      */
     public static function fromString(string $prefix): self
     {
-        if (preg_match(self::$regex, $prefix, $matches) === false) {
+        if (preg_match(self::$regex, $prefix, $matches) == false) {
             throw new \InvalidArgumentException('Got invalid prefix');
         }
 
