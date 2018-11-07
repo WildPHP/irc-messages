@@ -10,9 +10,9 @@ namespace WildPHP\Messages;
 
 use WildPHP\Messages\Generics\BaseIRCMessage;
 use WildPHP\Messages\Generics\IncomingMessage;
-use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
