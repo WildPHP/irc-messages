@@ -63,7 +63,7 @@ An incoming message may be converted from an `IncomingMessage` class.
 An outgoing message may be converted to a string in order to send it to an IRC server.
 
 | Name              | As incoming? | As outgoing? | Extra's?
-|-------------------|--------------|--------------|---------
+|-------------------|:------------:|:------------:|---------
 | 001/RPL_WELCOME   |       x      |              |
 | 005/RPL_ISUPPORT  |       x      |              |
 | 332/RPL_TOPIC     |       x      |              |
