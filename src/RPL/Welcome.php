@@ -32,7 +32,7 @@ class Welcome extends BaseIRCMessage implements IncomingMessageInterface
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

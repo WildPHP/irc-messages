@@ -43,7 +43,7 @@ class Pong extends BaseIRCMessage implements IncomingMessageInterface, OutgoingM
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

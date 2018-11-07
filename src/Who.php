@@ -49,7 +49,7 @@ class Who extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMe
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      * @throws \InvalidArgumentException
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self

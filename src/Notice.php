@@ -52,7 +52,7 @@ class Notice extends BaseIRCMessage implements IncomingMessageInterface, Outgoin
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

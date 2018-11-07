@@ -60,7 +60,7 @@ class Privmsg extends BaseIRCMessage implements IncomingMessageInterface, Outgoi
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

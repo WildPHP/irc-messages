@@ -45,7 +45,7 @@ class Quit extends BaseIRCMessage implements IncomingMessageInterface, OutgoingM
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      * @throws \InvalidArgumentException
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self

@@ -96,7 +96,7 @@ class Prefix
     /**
      * @param string $prefix
      *
-     * @return \self
+     * @return self
      */
     public static function fromString(string $prefix): self
     {
@@ -114,7 +114,7 @@ class Prefix
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

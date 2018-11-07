@@ -32,7 +32,7 @@ class EndOfNames extends BaseIRCMessage implements IncomingMessageInterface
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      * @throws \InvalidArgumentException
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self

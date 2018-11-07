@@ -43,7 +43,7 @@ class Authenticate extends BaseIRCMessage implements IncomingMessageInterface, O
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {

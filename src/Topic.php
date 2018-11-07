@@ -45,7 +45,7 @@ class Topic extends BaseIRCMessage implements IncomingMessageInterface, Outgoing
     /**
      * @param IncomingMessage $incomingMessage
      *
-     * @return \self
+     * @return self
      */
     public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
     {
