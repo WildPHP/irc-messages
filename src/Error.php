@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\MessageTrait;
 
 /**
@@ -19,19 +19,19 @@ use WildPHP\Messages\Traits\MessageTrait;
  *
  * Syntax: ERROR :message
  */
-class Error extends BaseIRCMessage implements IncomingMessageInterface
+class Error extends BaseIRCMessageImplementation implements IncomingMessageInterface
 {
     use MessageTrait;
 
     protected static $verb = 'ERROR';
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

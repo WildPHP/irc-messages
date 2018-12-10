@@ -9,27 +9,27 @@
 namespace WildPHP\Messages\Traits;
 
 
-use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Interfaces\PrefixInterface;
 
 trait PrefixTrait
 {
     /**
-     * @var Prefix
+     * @var PrefixInterface
      */
     protected $prefix = null;
 
     /**
-     * @return Prefix
+     * @return PrefixInterface
      */
-    public function getPrefix(): Prefix
+    public function getPrefix(): PrefixInterface
     {
         return $this->prefix;
     }
 
     /**
-     * @param Prefix $prefix
+     * @param PrefixInterface $prefix
      */
-    public function setPrefix(Prefix $prefix)
+    public function setPrefix(PrefixInterface $prefix)
     {
         $this->prefix = $prefix;
     }

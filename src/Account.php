@@ -8,10 +8,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\PrefixTrait;
 
 /**
@@ -20,7 +20,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix ACCOUNT accountname
  */
-class Account extends BaseIRCMessage implements IncomingMessageInterface
+class Account extends BaseIRCMessageImplementation implements IncomingMessageInterface
 {
     protected static $verb = 'ACCOUNT';
 
@@ -42,12 +42,12 @@ class Account extends BaseIRCMessage implements IncomingMessageInterface
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

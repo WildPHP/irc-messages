@@ -10,20 +10,20 @@ namespace WildPHP\Messages\Utility;
 
 
 use WildPHP\Messages\Exceptions\CastException;
-use WildPHP\Messages\Generics\IncomingMessage;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 
 class MessageCaster
 {
     /**
-     * @param IncomingMessage $incomingIrcMessage
+     * @param IrcMessageInterface $incomingIrcMessage
      *
      * @return OutgoingMessageInterface|IncomingMessageInterface
      * @throws \ReflectionException
      * @throws CastException
      */
-    public static function castMessage(IncomingMessage $incomingIrcMessage)
+    public static function castMessage(IrcMessageInterface $incomingIrcMessage)
     {
         $verb = $incomingIrcMessage->getVerb();
 

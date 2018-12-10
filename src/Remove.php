@@ -10,7 +10,7 @@
 namespace WildPHP\Messages;
 
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
@@ -23,7 +23,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix REMOVE #channel nickname :message
  */
-class Remove extends BaseIRCMessage implements OutgoingMessageInterface
+class Remove extends BaseIRCMessageImplementation implements OutgoingMessageInterface
 {
     use ChannelTrait;
     use PrefixTrait;

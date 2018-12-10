@@ -9,7 +9,10 @@
 
 namespace WildPHP\Messages\Generics;
 
-class Prefix
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
+use WildPHP\Messages\Interfaces\PrefixInterface;
+
+class Prefix implements PrefixInterface
 {
     /**
      * @var string
@@ -96,9 +99,9 @@ class Prefix
     /**
      * @param string $prefix
      *
-     * @return self
+     * @return PrefixInterface
      */
-    public static function fromString(string $prefix): self
+    public static function fromString(string $prefix): PrefixInterface
     {
         if (preg_match(self::$regex, $prefix, $matches) == false) {
             throw new \InvalidArgumentException('Got invalid prefix');
@@ -112,11 +115,11 @@ class Prefix
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
-     * @return self
+     * @return PrefixInterface
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): PrefixInterface
     {
         if (!empty($incomingMessage->getPrefix())) {
             return self::fromString($incomingMessage->getPrefix());

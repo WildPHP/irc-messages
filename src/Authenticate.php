@@ -9,9 +9,9 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 
 /**
@@ -21,7 +21,7 @@ use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
  * Syntax: AUTHENTICATE response
  * @TODO look into the documentation
  */
-class Authenticate extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
+class Authenticate extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'AUTHENTICATE';
 
@@ -41,11 +41,11 @@ class Authenticate extends BaseIRCMessage implements IncomingMessageInterface, O
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

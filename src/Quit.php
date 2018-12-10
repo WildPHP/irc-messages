@@ -9,10 +9,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
@@ -24,7 +24,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix QUIT :message
  */
-class Quit extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
+class Quit extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
     use NicknameTrait;
@@ -43,12 +43,12 @@ class Quit extends BaseIRCMessage implements IncomingMessageInterface, OutgoingM
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

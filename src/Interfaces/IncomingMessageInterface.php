@@ -10,25 +10,18 @@
 namespace WildPHP\Messages\Interfaces;
 
 
-use WildPHP\Messages\Generics\IncomingMessage;
-
 /**
  * Interface ReceivableMessage
  * @package WildPHP\Messages
  *
  * A syntax sample is included with all supported messages.
  */
-interface IncomingMessageInterface
+interface IncomingMessageInterface extends IrcMessageImplementationInterface
 {
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return mixed
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage);
-
-    /**
-     * @return string
-     */
-    public static function getVerb(): string;
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage);
 }

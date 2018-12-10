@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages\RPL;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\MessageTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\ServerTrait;
@@ -21,7 +21,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: :server 001 nickname :greeting
  */
-class Welcome extends BaseIRCMessage implements IncomingMessageInterface
+class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInterface
 {
     use NicknameTrait;
     use ServerTrait;
@@ -30,11 +30,11 @@ class Welcome extends BaseIRCMessage implements IncomingMessageInterface
     protected static $verb = '001';
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

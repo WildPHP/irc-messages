@@ -8,10 +8,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
@@ -22,7 +22,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix CAP nickname command [:capabilities]
  */
-class Cap extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
+class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
     use NicknameTrait;
@@ -56,11 +56,11 @@ class Cap extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMe
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

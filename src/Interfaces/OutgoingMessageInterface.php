@@ -9,15 +9,10 @@
 namespace WildPHP\Messages\Interfaces;
 
 
-interface OutgoingMessageInterface
+interface OutgoingMessageInterface extends IrcMessageImplementationInterface
 {
     /**
      * @return string
      */
     public function __toString();
-
-    /**
-     * @return string
-     */
-    public static function getVerb(): string;
 }

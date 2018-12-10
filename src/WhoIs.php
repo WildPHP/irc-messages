@@ -9,7 +9,7 @@
 namespace WildPHP\Messages;
 
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ServerTrait;
 
@@ -19,7 +19,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: WHOIS (server) nickname(,nickname,...)
  */
-class WhoIs extends BaseIRCMessage implements OutgoingMessageInterface
+class WhoIs extends BaseIRCMessageImplementation implements OutgoingMessageInterface
 {
     protected static $verb = 'WHOIS';
 

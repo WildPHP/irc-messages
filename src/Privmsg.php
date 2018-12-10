@@ -10,10 +10,10 @@
 namespace WildPHP\Messages;
 
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\MessageTrait;
@@ -26,7 +26,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix PRIVMSG #channel :message
  */
-class Privmsg extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
+class Privmsg extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
     use ChannelTrait;
@@ -58,11 +58,11 @@ class Privmsg extends BaseIRCMessage implements IncomingMessageInterface, Outgoi
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

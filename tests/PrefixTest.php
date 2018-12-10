@@ -8,9 +8,9 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Generics\IncomingMessage;
-use WildPHP\Messages\Generics\Prefix;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Generics\IrcMessage;
+use WildPHP\Messages\Generics\Prefix;
 
 class PrefixTest extends TestCase
 {
@@ -38,7 +38,7 @@ class PrefixTest extends TestCase
 
     public function testFromIncomingMessage()
     {
-        $incoming = new IncomingMessage('nickname!username@hostname', 'test');
+        $incoming = new IrcMessage('nickname!username@hostname', 'test');
 
         $prefix = Prefix::fromIncomingMessage($incoming);
 

@@ -6,8 +6,8 @@
  * Time: 15:47
  */
 
-use WildPHP\Messages\Utility\MessageCaster;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Utility\MessageCaster;
 
 class MessageCasterTest extends TestCase
 {
@@ -17,7 +17,7 @@ class MessageCasterTest extends TestCase
         $expected = new \WildPHP\Messages\Privmsg('#channel', 'Message');
         $expected->setPrefix(new \WildPHP\Messages\Generics\Prefix());
 
-        $incoming = new \WildPHP\Messages\Generics\IncomingMessage('', 'PRIVMSG', ['#channel', 'Message']);
+        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'PRIVMSG', ['#channel', 'Message']);
         $outcome = MessageCaster::castMessage($incoming);
 
         $this->assertEquals($expected, $outcome);
@@ -25,7 +25,7 @@ class MessageCasterTest extends TestCase
 
     public function testCastMessageInvalidClass()
     {
-        $incoming = new \WildPHP\Messages\Generics\IncomingMessage('', 'Generics\\BaseIRCMessage');
+        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'Generics\\BaseIRCMessage');
 
         $this->expectException(\WildPHP\Messages\Exceptions\CastException::class);
         MessageCaster::castMessage($incoming);
@@ -33,7 +33,7 @@ class MessageCasterTest extends TestCase
 
     public function testCastMessageClassNotFound()
     {
-        $incoming = new \WildPHP\Messages\Generics\IncomingMessage('', 'FOO');
+        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'FOO');
 
         $this->expectException(\WildPHP\Messages\Exceptions\CastException::class);
         MessageCaster::castMessage($incoming);
@@ -43,7 +43,7 @@ class MessageCasterTest extends TestCase
     {
         $expected = new \WildPHP\Messages\RPL\Topic();
 
-        $incoming = new \WildPHP\Messages\Generics\IncomingMessage('', '332', ['', '', '']);
+        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', '332', ['', '', '']);
         $outcome = MessageCaster::castMessage($incoming);
 
         $this->assertEquals($expected, $outcome);

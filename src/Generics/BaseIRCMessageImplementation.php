@@ -8,8 +8,9 @@
 
 namespace WildPHP\Messages\Generics;
 
+use WildPHP\Messages\Interfaces\IrcMessageImplementationInterface;
 
-abstract class BaseIRCMessage
+abstract class BaseIRCMessageImplementation implements IrcMessageImplementationInterface
 {
     /**
      * @var string

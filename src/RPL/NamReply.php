@@ -8,9 +8,9 @@
 
 namespace WildPHP\Messages\RPL;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\ServerTrait;
@@ -21,7 +21,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  *
  * Syntax: :server 353 nickname visibility channel :nicknames
  */
-class NamReply extends BaseIRCMessage implements IncomingMessageInterface
+class NamReply extends BaseIRCMessageImplementation implements IncomingMessageInterface
 {
     use NicknameTrait;
     use ChannelTrait;
@@ -34,11 +34,11 @@ class NamReply extends BaseIRCMessage implements IncomingMessageInterface
     protected $nicknames = [];
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());

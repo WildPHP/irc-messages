@@ -9,7 +9,9 @@
 namespace WildPHP\Messages\Generics;
 
 
-class IncomingMessage
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
+
+class IrcMessage implements IrcMessageInterface
 {
     /**
      * @var string

@@ -18,12 +18,13 @@
  */
 
 use PHPUnit\Framework\TestCase;
-use WildPHP\Messages\Generics\IncomingMessage;
 use WildPHP\Messages\Account;
 use WildPHP\Messages\Authenticate;
 use WildPHP\Messages\Away;
 use WildPHP\Messages\Cap;
 use WildPHP\Messages\Error;
+use WildPHP\Messages\Generics\IrcMessage;
+use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Join;
 use WildPHP\Messages\Kick;
 use WildPHP\Messages\Mode;
@@ -49,7 +50,6 @@ use WildPHP\Messages\Version;
 use WildPHP\Messages\Who;
 use WildPHP\Messages\WhoIs;
 use WildPHP\Messages\WhoWas;
-use WildPHP\Messages\Generics\Prefix;
 
 class IrcMessageTest extends TestCase
 {
@@ -62,7 +62,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Account::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -72,7 +72,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'ACCOUNT';
         $args = ['ircAccount'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$account = Account::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -95,7 +95,7 @@ class IrcMessageTest extends TestCase
         $prefix = '';
         $verb = 'AUTHENTICATE';
         $args = ['+'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$authenticate = Authenticate::fromIncomingMessage($incoming);
 
 		$this->assertEquals('+', $authenticate->getResponse());
@@ -103,7 +103,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Authenticate::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -123,7 +123,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'AWAY';
         $args = ['A sample message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$away = Away::fromIncomingMessage($incoming);
 
 		$this->assertEquals('nickname', $away->getNickname());
@@ -132,7 +132,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Away::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -160,7 +160,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = 'CAP';
         $args = ['*', 'LS', 'cap1 cap2'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
         $cap = Cap::fromIncomingMessage($incoming);
 
         $this->assertEquals('LS', $cap->getCommand());
@@ -170,7 +170,7 @@ class IrcMessageTest extends TestCase
 	    $prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 	    $this->expectException(\InvalidArgumentException::class);
 	    Cap::fromIncomingMessage($incomingIrcMessage);
     }
@@ -180,7 +180,7 @@ class IrcMessageTest extends TestCase
         $prefix = '';
         $verb = 'ERROR';
         $args = ['A sample message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$error = Error::fromIncomingMessage($incoming);
 
 		$this->assertEquals('A sample message', $error->getMessage());
@@ -188,7 +188,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Error::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -221,7 +221,7 @@ class IrcMessageTest extends TestCase
 		$prefix = 'nickname!username@hostname';
         $verb = 'JOIN';
         $args = ['#channel', 'ircAccountName', 'realname'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$join = Join::fromIncomingMessage($incoming);
 
 		$this->assertEquals('nickname', $join->getNickname());
@@ -235,7 +235,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'JOIN';
         $args = ['#channel'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$join = Join::fromIncomingMessage($incoming);
 
 		$this->assertEquals('nickname', $join->getNickname());
@@ -246,7 +246,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Join::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -268,7 +268,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'KICK';
         $args = ['#somechannel', 'othernickname', 'You deserved it!'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$kick = Kick::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -281,7 +281,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Kick::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -303,7 +303,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';
         $args = ['#channel', '-o+b', 'arg1', 'arg2'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$mode = Mode::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -316,7 +316,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Mode::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -326,7 +326,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';
         $args = ['user', '-o+b'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$mode = Mode::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -342,7 +342,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';
         $args = ['nickname', '-o+b'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$mode = Mode::fromIncomingMessage($incoming);
 
 		$this->assertEquals('nickname', $mode->getTarget());
@@ -377,7 +377,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'NICK';
         $args = ['newnickname'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$nick = Nick::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -388,7 +388,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Nick::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -409,7 +409,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'NOTICE';
         $args = ['#somechannel', 'This is a test message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$notice = Notice::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -420,7 +420,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Notice::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -441,7 +441,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'PART';
         $args = ['#channel', 'I have a valid reason'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$part = Part::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -453,7 +453,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Part::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -484,7 +484,7 @@ class IrcMessageTest extends TestCase
         $prefix = '';
         $verb = 'PING';
         $args = ['testserver1', 'testserver2'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$ping = Ping::fromIncomingMessage($incoming);
 
 		$this->assertEquals('testserver1', $ping->getServer1());
@@ -493,7 +493,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Ping::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -514,7 +514,7 @@ class IrcMessageTest extends TestCase
         $prefix = '';
         $verb = 'PONG';
         $args = ['testserver1', 'testserver2'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$pong = Pong::fromIncomingMessage($incoming);
 
 		$this->assertEquals('testserver1', $pong->getServer1());
@@ -523,7 +523,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Pong::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -559,7 +559,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'PRIVMSG';
         $args = ['#somechannel', 'This is a test message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$privmsg = Privmsg::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -570,7 +570,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Privmsg::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -580,7 +580,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'PRIVMSG';
         $args = ['#somechannel', "\x01" . 'ACTION This is a test message' . "\x01"];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$privmsg = Privmsg::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -606,7 +606,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'QUIT';
         $args = ['A sample message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$quit = Quit::fromIncomingMessage($incoming);
 
 		$userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -617,7 +617,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Quit::fromIncomingMessage($incomingIrcMessage);
 	}
@@ -649,7 +649,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '366';
         $args = ['nickname', '#channel', 'End of /NAMES list.'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_endofnames = EndOfNames::fromIncomingMessage($incoming);
 
 		$this->assertEquals('nickname', $rpl_endofnames->getNickname());
@@ -659,7 +659,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		EndOfNames::fromIncomingMessage($incomingIrcMessage);
     }
@@ -669,7 +669,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '005';
         $args = ['nickname', 'KEY1=value', 'KEY2=value2', 'are supported by this server'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_isupport = ISupport::fromIncomingMessage($incoming);
 
 		$this->assertEquals(['key1' => 'value', 'key2' => 'value2'], $rpl_isupport->getVariables());
@@ -680,7 +680,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		ISupport::fromIncomingMessage($incomingIrcMessage);
     }
@@ -690,7 +690,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '353';
         $args = ['nickname', '+', '#channel', 'nickname1 nickname2 nickname3'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_namreply = NamReply::fromIncomingMessage($incoming);
 
 		$this->assertEquals('server', $rpl_namreply->getServer());
@@ -701,7 +701,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		NamReply::fromIncomingMessage($incomingIrcMessage);
     }
@@ -711,7 +711,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '332';
         $args = ['nickname', '#channel', 'A new topic message'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_topic = RplTopic::fromIncomingMessage($incoming);
 
 		$this->assertEquals('server', $rpl_topic->getServer());
@@ -722,7 +722,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		RplTopic::fromIncomingMessage($incomingIrcMessage);
     }
@@ -732,7 +732,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '001';
         $args = ['nickname', 'Welcome to server!'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_welcome = Welcome::fromIncomingMessage($incoming);
 
 		$this->assertEquals('server', $rpl_welcome->getServer());
@@ -742,7 +742,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		Welcome::fromIncomingMessage($incomingIrcMessage);
     }
@@ -752,7 +752,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = '354';
         $args = ['ownnickname', 'username', 'hostname', 'nickname', 'status', 'accountname'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 		$rpl_whospcrpl = WhosPcRpl::fromIncomingMessage($incoming);
 
 		$this->assertEquals('server', $rpl_whospcrpl->getServer());
@@ -766,7 +766,7 @@ class IrcMessageTest extends TestCase
 		$prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 		$this->expectException(\InvalidArgumentException::class);
 		WhosPcRpl::fromIncomingMessage($incomingIrcMessage);
     }
@@ -787,7 +787,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'TOPIC';
         $args = ['#someChannel', 'This is a new topic'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
         $topic = Topic::fromIncomingMessage($incoming);
 
 	    $userPrefix = new Prefix('nickname', 'username', 'hostname');
@@ -798,7 +798,7 @@ class IrcMessageTest extends TestCase
 	    $prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 	    $this->expectException(\InvalidArgumentException::class);
 	    Topic::fromIncomingMessage($incomingIrcMessage);
     }
@@ -821,7 +821,7 @@ class IrcMessageTest extends TestCase
         $prefix = '';
         $verb = 'USER';
         $args = ['myusername', 'localhost', 'someserver', 'A real name'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
         $user = User::fromIncomingMessage($incoming);
 
         $this->assertEquals('myusername', $user->getUsername());
@@ -832,7 +832,7 @@ class IrcMessageTest extends TestCase
 	    $prefix = ':server';
 		$verb = 'TEEHEE';
 		$args = ['argument'];
-		$incomingIrcMessage = new IncomingMessage($prefix, $verb, $args);
+        $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
 	    $this->expectException(\InvalidArgumentException::class);
 	    User::fromIncomingMessage($incomingIrcMessage);
     }
@@ -866,7 +866,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'nickname!username@hostname';
         $verb = 'WHO';
         $args = ['#someChannel', '%nuhaf'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 
         $who = Who::fromIncomingMessage($incoming);
 
@@ -878,7 +878,7 @@ class IrcMessageTest extends TestCase
         $prefix = 'server';
         $verb = 'TEEHEE';
         $args = ['argument'];
-        $incoming = new IncomingMessage($prefix, $verb, $args);
+        $incoming = new IrcMessage($prefix, $verb, $args);
 
 	    $this->expectException(\InvalidArgumentException::class);
 	    Who::fromIncomingMessage($incoming);

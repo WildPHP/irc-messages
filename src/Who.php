@@ -8,10 +8,10 @@
 
 namespace WildPHP\Messages;
 
-use WildPHP\Messages\Generics\BaseIRCMessage;
-use WildPHP\Messages\Generics\IncomingMessage;
+use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
+use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
@@ -22,7 +22,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix WHO nickname/channel options
  */
-class Who extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMessageInterface
+class Who extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     protected static $verb = 'WHO';
 
@@ -47,12 +47,12 @@ class Who extends BaseIRCMessage implements IncomingMessageInterface, OutgoingMe
     }
 
     /**
-     * @param IncomingMessage $incomingMessage
+     * @param IrcMessageInterface $incomingMessage
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromIncomingMessage(IncomingMessage $incomingMessage): self
+    public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
