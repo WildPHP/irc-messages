@@ -21,7 +21,7 @@ abstract class BaseIRCMessageImplementation implements IrcMessageImplementationI
      * Additional data to be sent with the message.
      * @var array
      */
-    protected $messageParameters = [];
+    protected $tags = [];
 
     /**
      * @return string
@@ -34,16 +34,16 @@ abstract class BaseIRCMessageImplementation implements IrcMessageImplementationI
     /**
      * @return array
      */
-    public function getMessageParameters(): array
+    public function getTags(): array
     {
-        return $this->messageParameters;
+        return $this->tags;
     }
 
     /**
-     * @param array $messageParameters
+     * @param array $tags
      */
-    public function setMessageParameters(array $messageParameters)
+    public function setTags(array $tags)
     {
-        $this->messageParameters = $messageParameters;
+        $this->tags = $tags;
     }
 }

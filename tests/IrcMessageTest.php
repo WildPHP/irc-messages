@@ -915,8 +915,8 @@ class IrcMessageTest extends TestCase
 	{
 		$raw = new Raw('test');
 		
-		$raw->setMessageParameters(['test']);
+		$raw->setTags(['test']);
 		
-		self::assertEquals(['test'], $raw->getMessageParameters());
+		self::assertEquals(['test'], $raw->getTags());
 	}
 }
