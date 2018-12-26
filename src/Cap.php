@@ -19,7 +19,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  * Class Cap
  * @package WildPHP\Messages
  *
- * Syntax: prefix CAP nickname command [:capabilities]
+ * Syntax: prefix CAP nickname sub-command (*) [:capabilities]
  *
  * This definition implements version 3.1 and 3.2 of the IRCv3 capability negotiation spec
  * as described in the following documents:
@@ -48,12 +48,18 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     protected $capabilities = [];
 
     /**
+     * @var bool
+     */
+    private $finalMessage;
+
+    /**
      * Cap constructor.
      *
      * @param string $command
      * @param array $capabilities
+     * @param bool $finalMessage
      */
-    public function __construct(string $command, array $capabilities = [])
+    public function __construct(string $command, array $capabilities = [], bool $finalMessage = true)
     {
         if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
             throw new \InvalidArgumentException('Cap sub-command not valid');
@@ -61,6 +67,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 
         $this->setCommand($command);
         $this->setCapabilities($capabilities);
+        $this->finalMessage = $finalMessage;
     }
 
     /**
@@ -79,8 +86,9 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
         $clientIdentifier = array_shift($args);
         $command = array_shift($args);
         $capabilities = explode(' ', array_shift($args));
+        $isFinal = count($args) == 3;
 
-        $object = new self($command, $capabilities);
+        $object = new self($command, $capabilities, $isFinal);
         $object->setClientIdentifier($clientIdentifier);
         $object->setPrefix($prefix);
 
@@ -143,5 +151,21 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     public function setClientIdentifier(string $clientIdentifier): void
     {
         $this->clientIdentifier = $clientIdentifier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinalMessage(): bool
+    {
+        return $this->finalMessage;
+    }
+
+    /**
+     * @param bool $finalMessage
+     */
+    public function setFinalMessage(bool $finalMessage): void
+    {
+        $this->finalMessage = $finalMessage;
     }
 }
