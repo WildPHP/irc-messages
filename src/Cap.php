@@ -126,7 +126,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     {
         $capabilities = implode(' ', $this->getCapabilities());
 
-        return 'Cap ' . $this->getCommand() . (!empty($capabilities) ? ' :' . $capabilities : '') . "\r\n";
+        return 'CAP ' . $this->getCommand() . (!empty($capabilities) ? ' :' . $capabilities : '') . "\r\n";
     }
 
     /**
