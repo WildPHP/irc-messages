@@ -17,7 +17,7 @@ use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
  *
  * Syntax: N/A
  *
- * Should only be used for debugging purposes.
+ * Should only be used for development purposes.
  */
 class Raw extends BaseIRCMessageImplementation implements OutgoingMessageInterface
 {
