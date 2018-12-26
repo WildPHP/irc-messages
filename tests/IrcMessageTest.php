@@ -624,12 +624,15 @@ class IrcMessageTest extends TestCase
 
 	public function testRawCreate()
     {
+        \PHPUnit\Framework\Error\Notice::$enabled = false;
         $raw = new Raw('a command');
 
         $this->assertEquals('a command', $raw->getCommand());
 
         $expected = 'a command' . "\r\n";
         $this->assertEquals($expected, $raw->__toString());
+
+        \PHPUnit\Framework\Error\Notice::$enabled = true;
     }
 
 	public function testRemoveCreate()
@@ -913,10 +916,12 @@ class IrcMessageTest extends TestCase
 
 	public function testMessageParameters()
 	{
+        \PHPUnit\Framework\Error\Notice::$enabled = false;
 		$raw = new Raw('test');
 		
 		$raw->setMessageParameters(['test']);
 		
 		self::assertEquals(['test'], $raw->getMessageParameters());
+        \PHPUnit\Framework\Error\Notice::$enabled = true;
 	}
 }
