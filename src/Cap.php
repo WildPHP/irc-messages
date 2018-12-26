@@ -21,6 +21,11 @@ use WildPHP\Messages\Traits\PrefixTrait;
  * @package WildPHP\Messages
  *
  * Syntax: prefix CAP nickname command [:capabilities]
+ *
+ * This definition implements version 3.1 and 3.2 of the ircv3 capability negotiation spec
+ * as described in the following documents:
+ * https://ircv3.net/specs/core/capability-negotiation-3.1.html
+ * https://ircv3.net/specs/core/capability-negotiation-3.2.html
  */
 class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
