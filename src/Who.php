@@ -65,6 +65,7 @@ class Who extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 
         $object = new self($channel, $options);
         $object->setPrefix($prefix);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

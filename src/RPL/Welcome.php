@@ -48,6 +48,7 @@ class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInt
         $object->setNickname($nickname);
         $object->setServer($server);
         $object->setMessage($message);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

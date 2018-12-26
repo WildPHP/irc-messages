@@ -61,6 +61,7 @@ class Quit extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object = new self($message);
         $object->setPrefix($prefix);
         $object->setNickname($nickname);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

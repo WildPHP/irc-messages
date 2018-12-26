@@ -50,6 +50,7 @@ class EndOfNames extends BaseIRCMessageImplementation implements IncomingMessage
         $object->setNickname($nickname);
         $object->setChannel($channel);
         $object->setMessage($message);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

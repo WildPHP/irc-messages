@@ -98,6 +98,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object->setNickname($prefix->getNickname());
         $object->setIrcAccount($ircAccount);
         $object->setRealname($realname);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

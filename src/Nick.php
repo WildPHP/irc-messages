@@ -64,6 +64,7 @@ class Nick extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object = new self($newNickname);
         $object->setPrefix($prefix);
         $object->setNickname($nickname);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

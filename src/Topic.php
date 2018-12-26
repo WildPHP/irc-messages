@@ -60,6 +60,7 @@ class Topic extends BaseIRCMessageImplementation implements IncomingMessageInter
 
         $object = new self($channel, $message);
         $object->setPrefix($prefix);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

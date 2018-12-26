@@ -75,6 +75,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
         $object = new self($command, $capabilities);
         $object->setNickname($nickname);
         $object->setPrefix($prefix);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

@@ -87,6 +87,7 @@ class Privmsg extends BaseIRCMessageImplementation implements IncomingMessageInt
         $object->setIsCtcp($isCtcp);
         $object->setCtcpVerb($ctcpVerb);
         $object->setNickname($prefix->getNickname());
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

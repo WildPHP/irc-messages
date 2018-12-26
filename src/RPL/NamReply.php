@@ -57,6 +57,7 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
         $object->setChannel($channel);
         $object->setNicknames($nicknames);
         $object->setServer($server);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }
