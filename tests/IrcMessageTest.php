@@ -150,6 +150,8 @@ class IrcMessageTest extends TestCase
 
 	public function testCapCreateInvalidSubcommand()
 	{
+	    new Cap('LS 302');
+
 		$this->expectException(\InvalidArgumentException::class);
 		
 		new Cap('INVALID');
