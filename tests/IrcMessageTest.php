@@ -47,6 +47,7 @@ use WildPHP\Messages\RPL\WhosPcRpl;
 use WildPHP\Messages\Topic;
 use WildPHP\Messages\User;
 use WildPHP\Messages\Version;
+use WildPHP\Messages\WebIrc;
 use WildPHP\Messages\Who;
 use WildPHP\Messages\WhoIs;
 use WildPHP\Messages\WhoWas;
@@ -848,6 +849,18 @@ class IrcMessageTest extends TestCase
 		$version = new Version();
 		$expected = 'VERSION';
 		$this->assertEquals($expected, $version->__toString());
+    }
+
+    public function testWebIrcCreate()
+    {
+        $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
+        $this->assertEquals('password', $webIrc->getPassword());
+        $this->assertEquals('gateway', $webIrc->getGateway());
+        $this->assertEquals('hostname', $webIrc->getHostname());
+        $this->assertEquals('ip', $webIrc->getIp());
+
+        $expected = 'WEBIRC password gateway hostname ip';
+        $this->assertEquals($expected, $webIrc->__toString());
     }
 
 	public function testWhoCreate()
