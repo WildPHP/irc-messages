@@ -14,6 +14,11 @@ use WildPHP\Messages\Interfaces\IrcMessageInterface;
 class IrcMessage implements IrcMessageInterface
 {
     /**
+     * @var array
+     */
+    protected $tags = [];
+
+    /**
      * @var string
      */
     protected $prefix = '';
@@ -34,12 +39,14 @@ class IrcMessage implements IrcMessageInterface
      * @param string $prefix
      * @param string $verb
      * @param array $args
+     * @param array $tags
      */
-    public function __construct(string $prefix, string $verb, array $args = [])
+    public function __construct(string $prefix, string $verb, array $args = [], array $tags = [])
     {
         $this->setPrefix($prefix);
         $this->setVerb($verb);
         $this->setArgs(array_values($args));
+        $this->setTags($tags);
     }
 
     /**
@@ -88,5 +95,21 @@ class IrcMessage implements IrcMessageInterface
     public function setArgs(array $args)
     {
         $this->args = $args;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags(array $tags): void
+    {
+        $this->tags = $tags;
     }
 }

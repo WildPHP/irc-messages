@@ -39,4 +39,14 @@ interface IrcMessageInterface
      * @param array $args
      */
     public function setArgs(array $args);
+
+    /**
+     * @return array
+     */
+    public function getTags(): array;
+
+    /**
+     * @param array $tags
+     */
+    public function setTags(array $tags);
 }
