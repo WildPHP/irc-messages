@@ -47,7 +47,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function __construct(string $command, array $capabilities = [])
     {
-        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END'])) {
+        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END']) && preg_match('/^LS \d{3}$/', $command) == false) {
             throw new \InvalidArgumentException('Cap subcommand not valid');
         }
 
