@@ -13,7 +13,6 @@ use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
-use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
 /**
@@ -30,7 +29,6 @@ use WildPHP\Messages\Traits\PrefixTrait;
 class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
-    use NicknameTrait;
 
     protected static $verb = 'CAP';
 
@@ -38,6 +36,11 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      * @var string
      */
     protected $command = '';
+
+    /**
+     * @var string
+     */
+    protected $clientIdentifier = '';
 
     /**
      * @var array
@@ -73,12 +76,12 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
+        $clientIdentifier = array_shift($args);
         $command = array_shift($args);
         $capabilities = explode(' ', array_shift($args));
 
         $object = new self($command, $capabilities);
-        $object->setNickname($nickname);
+        $object->setClientIdentifier($clientIdentifier);
         $object->setPrefix($prefix);
 
         return $object;
@@ -124,5 +127,21 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
         $capabilities = implode(' ', $this->getCapabilities());
 
         return 'Cap ' . $this->getCommand() . (!empty($capabilities) ? ' :' . $capabilities : '') . "\r\n";
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientIdentifier(): string
+    {
+        return $this->clientIdentifier;
+    }
+
+    /**
+     * @param string $clientIdentifier
+     */
+    public function setClientIdentifier(string $clientIdentifier): void
+    {
+        $this->clientIdentifier = $clientIdentifier;
     }
 }
