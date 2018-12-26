@@ -144,7 +144,7 @@ class IrcMessageTest extends TestCase
         $this->assertEquals('REQ', $cap->getCommand());
         $this->assertEquals(['cap1', 'cap2'], $cap->getCapabilities());
 
-        $expected = 'Cap REQ :cap1 cap2' . "\r\n";
+        $expected = 'CAP REQ :cap1 cap2' . "\r\n";
         $this->assertEquals($expected, $cap->__toString());
     }
 
@@ -165,7 +165,7 @@ class IrcMessageTest extends TestCase
 
         $this->assertEquals('LS', $cap->getCommand());
         $this->assertEquals(['cap1', 'cap2'], $cap->getCapabilities());
-        $this->assertEquals('*', $cap->getNickname());
+        $this->assertEquals('*', $cap->getClientIdentifier());
 
 	    $prefix = ':server';
 		$verb = 'TEEHEE';
