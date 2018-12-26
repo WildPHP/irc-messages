@@ -21,7 +21,7 @@ use WildPHP\Messages\Traits\PrefixTrait;
  *
  * Syntax: prefix CAP nickname command [:capabilities]
  *
- * This definition implements version 3.1 and 3.2 of the ircv3 capability negotiation spec
+ * This definition implements version 3.1 and 3.2 of the IRCv3 capability negotiation spec
  * as described in the following documents:
  * https://ircv3.net/specs/core/capability-negotiation-3.1.html
  * https://ircv3.net/specs/core/capability-negotiation-3.2.html
@@ -56,7 +56,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     public function __construct(string $command, array $capabilities = [])
     {
         if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) == false) {
-            throw new \InvalidArgumentException('Cap subcommand not valid');
+            throw new \InvalidArgumentException('Cap sub-command not valid');
         }
 
         $this->setCommand($command);
