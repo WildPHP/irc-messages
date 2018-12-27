@@ -143,9 +143,13 @@ class IrcMessageTest extends TestCase
 
         $this->assertEquals('REQ', $cap->getCommand());
         $this->assertEquals(['cap1', 'cap2'], $cap->getCapabilities());
+        $this->assertTrue($cap->isFinalMessage());
 
         $expected = 'CAP REQ :cap1 cap2' . "\r\n";
         $this->assertEquals($expected, $cap->__toString());
+
+        $cap = new Cap('REQ', ['cap1', 'cap2'], false);
+        $this->assertFalse($cap->isFinalMessage());
     }
 
 	public function testCapCreateInvalidSubcommand()
@@ -168,6 +172,18 @@ class IrcMessageTest extends TestCase
         $this->assertEquals('LS', $cap->getCommand());
         $this->assertEquals(['cap1', 'cap2'], $cap->getCapabilities());
         $this->assertEquals('*', $cap->getClientIdentifier());
+        $this->assertTrue($cap->isFinalMessage());
+
+        $prefix = 'server';
+        $verb = 'CAP';
+        $args = ['*', 'LS', '*', 'cap1 cap2'];
+        $incoming = new IrcMessage($prefix, $verb, $args);
+        $cap = Cap::fromIncomingMessage($incoming);
+
+        $this->assertEquals('LS', $cap->getCommand());
+        $this->assertEquals(['cap1', 'cap2'], $cap->getCapabilities());
+        $this->assertEquals('*', $cap->getClientIdentifier());
+        $this->assertFalse($cap->isFinalMessage());
 
 	    $prefix = ':server';
 		$verb = 'TEEHEE';

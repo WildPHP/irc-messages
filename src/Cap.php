@@ -83,10 +83,14 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         $args = $incomingMessage->getArgs();
+        $isFinal = count($args) == 3;
         $clientIdentifier = array_shift($args);
         $command = array_shift($args);
+
+        if (!$isFinal)
+            array_shift($args);
+
         $capabilities = explode(' ', array_shift($args));
-        $isFinal = count($args) == 3;
 
         $object = new self($command, $capabilities, $isFinal);
         $object->setClientIdentifier($clientIdentifier);
