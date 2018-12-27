@@ -90,7 +90,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
         if (!$isFinal)
             array_shift($args);
 
-        $capabilities = explode(' ', array_shift($args));
+        $capabilities = explode(' ', trim(array_shift($args)));
 
         $object = new self($command, $capabilities, $isFinal);
         $object->setClientIdentifier($clientIdentifier);
