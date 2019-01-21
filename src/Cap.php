@@ -13,19 +13,22 @@ use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
-use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\PrefixTrait;
 
 /**
  * Class Cap
  * @package WildPHP\Messages
  *
- * Syntax: prefix CAP nickname command [:capabilities]
+ * Syntax: prefix CAP nickname sub-command (*) [:capabilities]
+ *
+ * This definition implements version 3.1 and 3.2 of the IRCv3 capability negotiation spec
+ * as described in the following documents:
+ * https://ircv3.net/specs/core/capability-negotiation-3.1.html
+ * https://ircv3.net/specs/core/capability-negotiation-3.2.html
  */
 class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterface, OutgoingMessageInterface
 {
     use PrefixTrait;
-    use NicknameTrait;
 
     protected static $verb = 'CAP';
 
@@ -35,24 +38,36 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     protected $command = '';
 
     /**
+     * @var string
+     */
+    protected $clientIdentifier = '';
+
+    /**
      * @var array
      */
     protected $capabilities = [];
+
+    /**
+     * @var bool
+     */
+    private $finalMessage;
 
     /**
      * Cap constructor.
      *
      * @param string $command
      * @param array $capabilities
+     * @param bool $finalMessage
      */
-    public function __construct(string $command, array $capabilities = [])
+    public function __construct(string $command, array $capabilities = [], bool $finalMessage = true)
     {
-        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END'])) {
-            throw new \InvalidArgumentException('Cap subcommand not valid');
+        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
+            throw new \InvalidArgumentException('Cap sub-command not valid');
         }
 
         $this->setCommand($command);
         $this->setCapabilities($capabilities);
+        $this->finalMessage = $finalMessage;
     }
 
     /**
@@ -68,12 +83,17 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
+        $isFinal = count($args) == 3;
+        $clientIdentifier = array_shift($args);
         $command = array_shift($args);
-        $capabilities = explode(' ', array_shift($args));
 
-        $object = new self($command, $capabilities);
-        $object->setNickname($nickname);
+        if (!$isFinal)
+            array_shift($args);
+
+        $capabilities = explode(' ', trim(array_shift($args)));
+
+        $object = new self($command, $capabilities, $isFinal);
+        $object->setClientIdentifier($clientIdentifier);
         $object->setPrefix($prefix);
 
         return $object;
@@ -118,6 +138,38 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     {
         $capabilities = implode(' ', $this->getCapabilities());
 
-        return 'Cap ' . $this->getCommand() . (!empty($capabilities) ? ' :' . $capabilities : '') . "\r\n";
+        return 'CAP ' . $this->getCommand() . (!empty($capabilities) ? ' :' . $capabilities : '') . "\r\n";
+    }
+
+    /**
+     * @return string
+     */
+    public function getClientIdentifier(): string
+    {
+        return $this->clientIdentifier;
+    }
+
+    /**
+     * @param string $clientIdentifier
+     */
+    public function setClientIdentifier(string $clientIdentifier): void
+    {
+        $this->clientIdentifier = $clientIdentifier;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFinalMessage(): bool
+    {
+        return $this->finalMessage;
+    }
+
+    /**
+     * @param bool $finalMessage
+     */
+    public function setFinalMessage(bool $finalMessage): void
+    {
+        $this->finalMessage = $finalMessage;
     }
 }
