@@ -643,7 +643,7 @@ class IrcMessageTest extends TestCase
 
 	public function testRawCreate()
     {
-        $raw = new Raw('a command');
+        $raw = @new Raw('a command');
 
         $this->assertEquals('a command', $raw->getCommand());
 
@@ -944,7 +944,7 @@ class IrcMessageTest extends TestCase
 
 	public function testMessageParameters()
 	{
-		$raw = new Raw('test');
+		$raw = @new Raw('test');
 		
 		$raw->setTags(['test']);
 		

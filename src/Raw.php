@@ -15,10 +15,18 @@ use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
  * Class RAW
  * @package WildPHP\Messages
  *
- * Syntax: prefix RAW nickname/channel options
+ * Syntax: N/A
+ *
+ * Should only be used for development purposes.
  */
 class Raw extends BaseIRCMessageImplementation implements OutgoingMessageInterface
 {
+    /**
+     * It is unsafe to rely on the verb of this message type.
+     * @var string
+     */
+    public static $verb = 'WPHP_RAW';
+
     /**
      * @var string
      */
@@ -31,6 +39,8 @@ class Raw extends BaseIRCMessageImplementation implements OutgoingMessageInterfa
      */
     public function __construct(string $command)
     {
+        trigger_error('The use of the RAW IRC message type is meant for development purposes only. ' .
+            'If the message you want to use is not implemented, please file a bug report.');
         $this->setCommand($command);
     }
 
