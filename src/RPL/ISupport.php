@@ -60,6 +60,7 @@ class ISupport extends BaseIRCMessageImplementation implements IncomingMessageIn
         $object->setServer($server);
         $object->setVariables($variables);
         $object->setMessage($message);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

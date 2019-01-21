@@ -55,7 +55,10 @@ class Pong extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $server1 = $args[0];
         $server2 = $args[1] ?? '';
 
-        return new self($server1, $server2);
+        $object = new self($server1, $server2);
+        $object->setTags($incomingMessage->getTags());
+
+        return $object;
     }
 
     /**

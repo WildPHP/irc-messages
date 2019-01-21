@@ -84,6 +84,7 @@ class WhosPcRpl extends BaseIRCMessageImplementation implements IncomingMessageI
         $object->setStatus($status);
         $object->setAccountname($accountname);
         $object->setServer($server);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

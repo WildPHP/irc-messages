@@ -79,6 +79,7 @@ class User extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $realname = array_shift($args);
 
         $object = new self($username, $hostname, $servername, $realname);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

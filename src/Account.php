@@ -58,6 +58,7 @@ class Account extends BaseIRCMessageImplementation implements IncomingMessageInt
 
         $object = new self($accountName);
         $object->setPrefix($prefix);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

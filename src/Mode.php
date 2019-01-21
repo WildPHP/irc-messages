@@ -84,6 +84,7 @@ class Mode extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object = new self($target, $flags, $args);
         $object->setPrefix($prefix);
         $object->setNickname($prefix->getNickname());
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

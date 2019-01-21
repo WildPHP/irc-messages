@@ -53,6 +53,7 @@ class Topic extends BaseIRCMessageImplementation implements IncomingMessageInter
         $object->setChannel($channel);
         $object->setMessage($message);
         $object->setServer($server);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

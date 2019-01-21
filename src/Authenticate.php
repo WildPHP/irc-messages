@@ -53,6 +53,7 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
         $response = $incomingMessage->getArgs()[0];
 
         $object = new self($response);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

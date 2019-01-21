@@ -73,6 +73,7 @@ class Part extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object = new self($channel, $message);
         $object->setPrefix($prefix);
         $object->setNickname($prefix->getNickname());
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

@@ -75,6 +75,7 @@ class Kick extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $object = new self($channel, $target, $message);
         $object->setPrefix($prefix);
         $object->setNickname($prefix->getNickname());
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }

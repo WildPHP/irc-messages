@@ -40,6 +40,7 @@ class Error extends BaseIRCMessageImplementation implements IncomingMessageInter
         $message = $incomingMessage->getArgs()[0];
         $object = new self();
         $object->setMessage($message);
+        $object->setTags($incomingMessage->getTags());
 
         return $object;
     }
