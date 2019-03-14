@@ -18,39 +18,7 @@
  */
 
 use PHPUnit\Framework\TestCase;
-use WildPHP\Messages\Account;
-use WildPHP\Messages\Authenticate;
-use WildPHP\Messages\Away;
-use WildPHP\Messages\Cap;
-use WildPHP\Messages\Error;
-use WildPHP\Messages\Generics\IrcMessage;
-use WildPHP\Messages\Generics\Prefix;
-use WildPHP\Messages\Join;
-use WildPHP\Messages\Kick;
-use WildPHP\Messages\Mode;
-use WildPHP\Messages\Names;
-use WildPHP\Messages\Nick;
-use WildPHP\Messages\Notice;
-use WildPHP\Messages\Part;
-use WildPHP\Messages\Pass;
-use WildPHP\Messages\Ping;
-use WildPHP\Messages\Pong;
-use WildPHP\Messages\Privmsg;
-use WildPHP\Messages\Quit;
 use WildPHP\Messages\Raw;
-use WildPHP\Messages\RPL\EndOfNames;
-use WildPHP\Messages\RPL\ISupport;
-use WildPHP\Messages\RPL\NamReply;
-use WildPHP\Messages\RPL\Topic as RplTopic;
-use WildPHP\Messages\RPL\Welcome;
-use WildPHP\Messages\RPL\WhosPcRpl;
-use WildPHP\Messages\Topic;
-use WildPHP\Messages\User;
-use WildPHP\Messages\Version;
-use WildPHP\Messages\WebIrc;
-use WildPHP\Messages\Who;
-use WildPHP\Messages\WhoIs;
-use WildPHP\Messages\WhoWas;
 
 class IrcMessageTest extends TestCase
 {
