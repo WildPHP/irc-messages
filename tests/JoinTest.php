@@ -27,19 +27,19 @@ use PHPUnit\Framework\TestCase;
 class JoinTest extends TestCase
 {
 
-    public function testGetRealname()
+    public function testGetRealname(): void
     {
 
     }
 
-    public function testJoinCreateKeyMismatch()
+    public function testJoinCreateKeyMismatch(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         new Join(['#channel1', '#channel2'], ['key1']);
     }
 
-    public function testCreateArray()
+    public function testCreateArray(): void
     {
         $join = new Join(['#channel1', '#channel2'], ['key1', 'key2']);
 
@@ -47,7 +47,7 @@ class JoinTest extends TestCase
         $this->assertEquals(['key1', 'key2'], $join->getKeys());
     }
 
-    public function testCreateString()
+    public function testCreateString(): void
     {
         $join = new Join('#channel1', 'key1');
 
@@ -55,7 +55,7 @@ class JoinTest extends TestCase
         $this->assertEquals(['key1'], $join->getKeys());
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $join = new Join(['#channel1', '#channel2'], ['key1', 'key2']);
 
@@ -63,12 +63,12 @@ class JoinTest extends TestCase
         $this->assertEquals($expected, $join->__toString());
     }
 
-    public function testGetIrcAccount()
+    public function testGetIrcAccount(): void
     {
 
     }
 
-    public function testFromIncomingMessageExtended()
+    public function testFromIncomingMessageExtended(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'JOIN';
@@ -82,7 +82,7 @@ class JoinTest extends TestCase
         $this->assertEquals('realname', $join->getRealname());
     }
 
-    public function testFromIncomingMessageRegular()
+    public function testFromIncomingMessageRegular(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'JOIN';
@@ -96,7 +96,7 @@ class JoinTest extends TestCase
         $this->assertEquals('', $join->getRealname());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -106,7 +106,7 @@ class JoinTest extends TestCase
         Join::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testGetKeys()
+    public function testGetKeys(): void
     {
 
     }

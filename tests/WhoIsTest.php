@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class WhoIsTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $whois = new WhoIs(['nickname1', 'nickname2'], 'server');
         $this->assertEquals(['nickname1', 'nickname2'], $whois->getNicknames());

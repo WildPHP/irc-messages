@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $user = new User('myusername', 'localhost', 'someserver', 'arealname');
 
@@ -27,7 +27,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected, $user->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = '';
         $verb = 'USER';
@@ -41,7 +41,7 @@ class UserTest extends TestCase
         $this->assertEquals('A real name', $user->getRealname());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

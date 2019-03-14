@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class PartTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $part = new Part(['#channel1', '#channel2'], 'I am out');
 
@@ -26,7 +26,7 @@ class PartTest extends TestCase
         $this->assertEquals($expected, $part->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'PART';
@@ -41,7 +41,7 @@ class PartTest extends TestCase
         $this->assertEquals('I have a valid reason', $part->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

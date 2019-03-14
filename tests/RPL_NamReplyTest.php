@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class RPL_NamReplyTest extends TestCase
 {
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = '353';
@@ -28,7 +28,7 @@ class RPL_NamReplyTest extends TestCase
         $this->assertEquals(['nickname1', 'nickname2', 'nickname3'], $rpl_namreply->getNicknames());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

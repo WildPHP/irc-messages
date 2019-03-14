@@ -14,14 +14,14 @@ use PHPUnit\Framework\TestCase;
 
 class RplTranslateEnumTest extends TestCase
 {
-    public function testTranslate()
+    public function testTranslate(): void
     {
         $expected = Topic::class;
 
         $this->assertEquals($expected, RplTranslateEnum::translateNumeric('332'));
     }
 
-    public function testTranslateNotFound()
+    public function testTranslateNotFound(): void
     {
         $expected = false;
 

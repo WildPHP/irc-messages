@@ -26,7 +26,7 @@ use WildPHP\Messages\Generics\IrcMessage;
 class AwayTest extends TestCase
 {
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $away = new Away('A sample message');
 
@@ -36,7 +36,7 @@ class AwayTest extends TestCase
         $this->assertEquals($expected, $away->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'AWAY';
@@ -48,7 +48,7 @@ class AwayTest extends TestCase
         $this->assertEquals('A sample message', $away->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

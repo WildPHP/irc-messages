@@ -22,8 +22,8 @@ use WildPHP\Messages\Raw;
 
 class IrcMessageTest extends TestCase
 {
-	public function testMessageParameters()
-	{
+	public function testMessageParameters(): void
+    {
 		$raw = @new Raw('test');
 
 		$raw->setTags(['test']);

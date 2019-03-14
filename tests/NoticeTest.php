@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class NoticeTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $notice = new Notice('#somechannel', 'This is a test message');
 
@@ -26,7 +26,7 @@ class NoticeTest extends TestCase
         $this->assertEquals($expected, $notice->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'NOTICE';
@@ -39,7 +39,7 @@ class NoticeTest extends TestCase
         $this->assertEquals('#somechannel', $notice->getChannel());
         $this->assertEquals('This is a test message', $notice->getMessage());
     }
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

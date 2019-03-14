@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class WhoWasTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $whowas = new WhoWas(['nickname1', 'nickname2'], 2, 'server');
         $this->assertEquals(['nickname1', 'nickname2'], $whowas->getNicknames());

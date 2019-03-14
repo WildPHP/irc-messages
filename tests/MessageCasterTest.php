@@ -12,7 +12,7 @@ use WildPHP\Messages\Utility\MessageCaster;
 class MessageCasterTest extends TestCase
 {
 
-    public function testCastMessage()
+    public function testCastMessage(): void
     {
         $expected = new \WildPHP\Messages\Privmsg('#channel', 'Message');
         $expected->setPrefix(new \WildPHP\Messages\Generics\Prefix());
@@ -23,7 +23,7 @@ class MessageCasterTest extends TestCase
         $this->assertEquals($expected, $outcome);
     }
 
-    public function testCastMessageInvalidClass()
+    public function testCastMessageInvalidClass(): void
     {
         $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'Generics\\BaseIRCMessage');
 
@@ -31,7 +31,7 @@ class MessageCasterTest extends TestCase
         MessageCaster::castMessage($incoming);
     }
 
-    public function testCastMessageClassNotFound()
+    public function testCastMessageClassNotFound(): void
     {
         $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'FOO');
 
@@ -39,7 +39,7 @@ class MessageCasterTest extends TestCase
         MessageCaster::castMessage($incoming);
     }
 
-    public function testCastNumericVerbMessage()
+    public function testCastNumericVerbMessage(): void
     {
         $expected = new \WildPHP\Messages\RPL\Topic();
 

@@ -26,7 +26,7 @@ use WildPHP\Messages\Generics\IrcMessage;
 class ErrorTest extends TestCase
 {
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = '';
         $verb = 'ERROR';
@@ -37,7 +37,7 @@ class ErrorTest extends TestCase
         $this->assertEquals('A sample message', $error->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class RPL_WhosPcRplTest extends TestCase
 {
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = '354';
@@ -31,7 +31,7 @@ class RPL_WhosPcRplTest extends TestCase
         $this->assertEquals('accountname', $rpl_whospcrpl->getAccountname());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

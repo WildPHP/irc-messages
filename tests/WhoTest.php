@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class WhoTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $who = new Who('#someChannel', '%nuhaf');
 
@@ -26,7 +26,7 @@ class WhoTest extends TestCase
         $this->assertEquals($expected, $who->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'WHO';
@@ -41,7 +41,7 @@ class WhoTest extends TestCase
         $this->assertEquals('%nuhaf', $who->getOptions());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = 'server';
         $verb = 'TEEHEE';

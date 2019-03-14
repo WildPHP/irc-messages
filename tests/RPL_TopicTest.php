@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class RPL_TopicTest extends TestCase
 {
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = '332';
@@ -28,7 +28,7 @@ class RPL_TopicTest extends TestCase
         $this->assertEquals('A new topic message', $rpl_topic->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

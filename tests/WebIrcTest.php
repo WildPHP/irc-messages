@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class WebIrcTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('password', $webIrc->getPassword());

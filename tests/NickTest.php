@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class NickTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $nick = new Nick('newnickname');
 
@@ -25,7 +25,7 @@ class NickTest extends TestCase
         $this->assertEquals($expected, $nick->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'NICK';
@@ -39,7 +39,7 @@ class NickTest extends TestCase
         $this->assertEquals('newnickname', $nick->getNewNickname());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

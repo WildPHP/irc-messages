@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class NamesTest extends TestCase
 {
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $names = new Names('#testChannel', 'testServer');
 

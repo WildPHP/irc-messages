@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class RemoveTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $remove = new Remove('#channel', 'nickname', 'Get out!');
 

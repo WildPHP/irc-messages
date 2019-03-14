@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class PingTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $ping = new Ping('testserver1', 'testserver2');
 
@@ -25,7 +25,7 @@ class PingTest extends TestCase
         $this->assertEquals($expected, $ping->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = '';
         $verb = 'PING';
@@ -37,7 +37,7 @@ class PingTest extends TestCase
         $this->assertEquals('testserver2', $ping->getServer2());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

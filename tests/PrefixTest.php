@@ -15,14 +15,14 @@ use WildPHP\Messages\Generics\Prefix;
 class PrefixTest extends TestCase
 {
 
-    public function testSetNickname()
+    public function testSetNickname(): void
     {
         $prefix = new Prefix();
         $prefix->setNickname('test');
         $this->assertEquals('test', $prefix->getNickname());
     }
 
-    public function testFromString()
+    public function testFromString(): void
     {
         $prefixString = 'nickname!username@hostname';
 
@@ -36,7 +36,7 @@ class PrefixTest extends TestCase
         Prefix::fromString('nickname!');
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $incoming = new IrcMessage('nickname!username@hostname', 'test');
 
@@ -47,14 +47,14 @@ class PrefixTest extends TestCase
         $this->assertEquals('hostname', $prefix->getHostname());
     }
 
-    public function testSetHostname()
+    public function testSetHostname(): void
     {
         $prefix = new Prefix();
         $prefix->setHostname('test');
         $this->assertEquals('test', $prefix->getHostname());
     }
 
-    public function testSetUsername()
+    public function testSetUsername(): void
     {
         $prefix = new Prefix();
         $prefix->setUsername('test');

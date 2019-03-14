@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class VersionTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $version = new Version('server');
         $this->assertEquals('server', $version->getServer());

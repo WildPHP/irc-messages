@@ -26,7 +26,7 @@ use WildPHP\Messages\Generics\IrcMessage;
 class CapTest extends TestCase
 {
 
-    public function testGetCommand()
+    public function testGetCommand(): void
     {
         $cap = new Cap('REQ', ['cap1', 'cap2']);
         $this->assertEquals('REQ', $cap->getCommand());
@@ -35,7 +35,7 @@ class CapTest extends TestCase
         $this->assertEquals('ACK', $cap->getCommand());
     }
 
-    public function testSetCommandThrowsException()
+    public function testSetCommandThrowsException(): void
     {
         $cap = new Cap('REQ', ['cap1', 'cap2']);
 
@@ -43,7 +43,7 @@ class CapTest extends TestCase
         $cap->setCommand('TEEHEE');
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = 'CAP';
@@ -68,7 +68,7 @@ class CapTest extends TestCase
         $this->assertFalse($cap->isFinalMessage());
     }
 
-    public function testCapCreateInvalidSubcommand()
+    public function testCapCreateInvalidSubcommand(): void
     {
         new Cap('LS 302');
 
@@ -77,7 +77,7 @@ class CapTest extends TestCase
         new Cap('INVALID');
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -87,7 +87,7 @@ class CapTest extends TestCase
         Cap::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testGetCapabilities()
+    public function testGetCapabilities(): void
     {
         $capabilities = ['cap1', 'cap2'];
         $cap = new Cap('REQ', $capabilities);
@@ -97,7 +97,7 @@ class CapTest extends TestCase
         $this->assertEquals(['cap1'], $cap->getCapabilities());
     }
 
-    public function testGetClientIdentifier()
+    public function testGetClientIdentifier(): void
     {
         $cap = new Cap('REQ', ['cap1', 'cap2']);
 
@@ -105,7 +105,7 @@ class CapTest extends TestCase
         $this->assertSame('test', $cap->getClientIdentifier());
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $cap = new Cap('REQ', ['cap1', 'cap2']);
 
@@ -117,7 +117,7 @@ class CapTest extends TestCase
         $this->assertEquals($expected, $cap->__toString());
     }
 
-    public function testIsFinalMessage()
+    public function testIsFinalMessage(): void
     {
         $cap = new Cap('REQ', ['cap1', 'cap2'], false);
         $this->assertFalse($cap->isFinalMessage());

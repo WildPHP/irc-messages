@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class ModeTest extends TestCase
 {
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $mode = new Mode('target', '-o+b', ['arg1', 'arg2']);
 
@@ -28,7 +28,7 @@ class ModeTest extends TestCase
         $this->assertEquals($expected, $mode->__toString());
     }
 
-    public function testFromIncomingMessageChannel()
+    public function testFromIncomingMessageChannel(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';
@@ -44,7 +44,7 @@ class ModeTest extends TestCase
         $this->assertEquals(['arg1', 'arg2'], $mode->getArguments());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -54,7 +54,7 @@ class ModeTest extends TestCase
         Mode::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testFromIncomingMessageUser()
+    public function testFromIncomingMessageUser(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';
@@ -70,7 +70,7 @@ class ModeTest extends TestCase
         $this->assertEquals([], $mode->getArguments());
     }
 
-    public function testFromIncomingMessageInitial()
+    public function testFromIncomingMessageInitial(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'MODE';

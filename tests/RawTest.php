@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class RawTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         // silence this, since raw throws a warning.
         $raw = @new Raw('a command');

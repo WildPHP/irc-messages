@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class PassTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $pass = new Pass('myseekritpassw0rd');
 

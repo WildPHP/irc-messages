@@ -26,7 +26,7 @@ use WildPHP\Messages\Generics\IrcMessage;
 class AuthenticateTest extends TestCase
 {
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = '';
         $verb = 'AUTHENTICATE';
@@ -37,7 +37,7 @@ class AuthenticateTest extends TestCase
         $this->assertEquals('+', $authenticate->getResponse());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -47,7 +47,7 @@ class AuthenticateTest extends TestCase
         Authenticate::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testGetSetResponse()
+    public function testGetSetResponse(): void
     {
         $authenticate = new Authenticate('+');
 
@@ -56,7 +56,7 @@ class AuthenticateTest extends TestCase
         $this->assertEquals($response, $authenticate->getResponse());
     }
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $authenticate = new Authenticate('+');
 

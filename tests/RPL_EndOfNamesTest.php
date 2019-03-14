@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class RPL_EndOfNamesTest extends TestCase
 {
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = '366';
@@ -27,7 +27,7 @@ class RPL_EndOfNamesTest extends TestCase
         $this->assertEquals('End of /NAMES list.', $rpl_endofnames->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

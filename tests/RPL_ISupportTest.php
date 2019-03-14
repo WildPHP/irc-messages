@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class RPL_ISupportTest extends TestCase
 {
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
         $verb = '005';
@@ -28,7 +28,7 @@ class RPL_ISupportTest extends TestCase
         $this->assertEquals('are supported by this server', $rpl_isupport->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

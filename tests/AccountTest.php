@@ -27,7 +27,7 @@ use WildPHP\Messages\Generics\Prefix;
 class AccountTest extends TestCase
 {
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'ACCOUNT';
@@ -40,7 +40,7 @@ class AccountTest extends TestCase
         $this->assertEquals('ircAccount', $account->getAccountName());
     }
 
-    public function testFromIncomingIrcMessageThrowsException()
+    public function testFromIncomingIrcMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -50,7 +50,7 @@ class AccountTest extends TestCase
         Account::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testGetSetAccountName()
+    public function testGetSetAccountName(): void
     {
         $account = new Account('ircAccount');
 
@@ -59,7 +59,7 @@ class AccountTest extends TestCase
         $this->assertEquals($accountName, $account->getAccountName());
     }
 
-    public function test__construct()
+    public function test__construct(): void
     {
         $account = new Account('ircAccount');
         $this->assertEquals('ircAccount', $account->getAccountName());

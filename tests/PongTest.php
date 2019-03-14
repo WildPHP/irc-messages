@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class PongTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $pong = new Pong('testserver1', 'testserver2');
 
@@ -25,7 +25,7 @@ class PongTest extends TestCase
         $this->assertEquals($expected, $pong->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = '';
         $verb = 'PONG';
@@ -37,7 +37,7 @@ class PongTest extends TestCase
         $this->assertEquals('testserver2', $pong->getServer2());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

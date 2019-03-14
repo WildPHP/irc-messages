@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class TopicTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $topic = new TOPIC('#someChannel', 'Test message');
 
@@ -26,7 +26,7 @@ class TopicTest extends TestCase
         $this->assertEquals($expected, $topic->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'TOPIC';
@@ -40,7 +40,7 @@ class TopicTest extends TestCase
         $this->assertEquals('This is a new topic', $topic->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

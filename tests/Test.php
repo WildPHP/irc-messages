@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class Test extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $privmsg = new Privmsg('#somechannel', 'This is a test message');
 
@@ -26,7 +26,7 @@ class Test extends TestCase
         $this->assertEquals($expected, $privmsg->__toString());
     }
 
-    public function test__toStringCTCP()
+    public function test__toStringCTCP(): void
     {
         $privmsg = new Privmsg('#somechannel', 'This is a test message');
         $privmsg->setCtcpVerb('ACTION');
@@ -41,7 +41,7 @@ class Test extends TestCase
         $this->assertEquals($expected, $privmsg->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'PRIVMSG';
@@ -55,7 +55,7 @@ class Test extends TestCase
         $this->assertEquals('This is a test message', $privmsg->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
@@ -65,7 +65,7 @@ class Test extends TestCase
         Privmsg::fromIncomingMessage($incomingIrcMessage);
     }
 
-    public function testFromIncomingMessageCTCP()
+    public function testFromIncomingMessageCTCP(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'PRIVMSG';

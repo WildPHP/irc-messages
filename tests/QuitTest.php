@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class QuitTest extends TestCase
 {
-    public function test__toString()
+    public function test__toString(): void
     {
         $quit = new Quit('A sample message');
 
@@ -25,7 +25,7 @@ class QuitTest extends TestCase
         $this->assertEquals($expected, $quit->__toString());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'QUIT';
@@ -39,7 +39,7 @@ class QuitTest extends TestCase
         $this->assertEquals('A sample message', $quit->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';

@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
 class KickTest extends TestCase
 {
 
-    public function test__toString()
+    public function test__toString(): void
     {
         $kick = new Kick('#channel', 'nickname', 'Bleep you!');
 
@@ -39,7 +39,7 @@ class KickTest extends TestCase
         $this->assertEquals($expected, $kick->__toString());
     }
 
-    public function testGetTarget()
+    public function testGetTarget(): void
     {
         $kick = new Kick('#channel', 'nickname', 'Bleep you!');
         $this->assertEquals('nickname', $kick->getTarget());
@@ -48,7 +48,7 @@ class KickTest extends TestCase
         $this->assertEquals('othername', $kick->getTarget());
     }
 
-    public function testFromIncomingMessage()
+    public function testFromIncomingMessage(): void
     {
         $prefix = 'nickname!username@hostname';
         $verb = 'KICK';
@@ -64,7 +64,7 @@ class KickTest extends TestCase
         $this->assertEquals('You deserved it!', $kick->getMessage());
     }
 
-    public function testFromIncomingMessageThrowsException()
+    public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';
         $verb = 'TEEHEE';
