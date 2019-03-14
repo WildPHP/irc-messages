@@ -1,11 +1,10 @@
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-
-/**
- * Created by PhpStorm.
- * User: rkerkhof
- * Date: 07/11/2018
- * Time: 15:47
+<?php /**
+ * Copyright 2019 The WildPHP Team
+ *
+ * You should have received a copy of the MIT license with the project.
+ * See the LICENSE file for more information.
  */
+/** @noinspection PhpUnhandledExceptionInspection */
 
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Utility\MessageCaster;
