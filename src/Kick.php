@@ -9,7 +9,6 @@
 
 namespace WildPHP\Messages;
 
-
 use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
@@ -63,7 +62,7 @@ class Kick extends BaseIRCMessageImplementation implements IncomingMessageInterf
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() !== self::getVerb()) {
-            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+            throw new InvalidArgumentException(sprintf('Expected incoming %s; got %s', self::getVerb(), $incomingMessage->getVerb()));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
