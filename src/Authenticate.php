@@ -51,7 +51,8 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
         if ($incomingMessage->getVerb() != self::getVerb()) {
             throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
-        $response = $incomingMessage->getArgs()[0];
+
+        [$response] = $incomingMessage->getArgs();
 
         $object = new self($response);
         $object->setTags($incomingMessage->getTags());

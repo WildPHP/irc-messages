@@ -43,10 +43,7 @@ class Topic extends BaseIRCMessageImplementation implements IncomingMessageInter
         }
 
         $server = $incomingMessage->getPrefix();
-        $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
-        $channel = array_shift($args);
-        $message = array_shift($args);
+        [$nickname, $channel, $message] = $incomingMessage->getArgs();
 
         $object = new self();
         $object->setNickname($nickname);

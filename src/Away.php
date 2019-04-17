@@ -56,7 +56,7 @@ class Away extends BaseIRCMessageImplementation implements IncomingMessageInterf
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
 
-        $message = $incomingMessage->getArgs()[0];
+        [$message] = $incomingMessage->getArgs();
 
         $object = new self($message);
         $object->setPrefix($prefix);

@@ -37,7 +37,8 @@ class Error extends BaseIRCMessageImplementation implements IncomingMessageInter
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $message = $incomingMessage->getArgs()[0];
+        [$message] = $incomingMessage->getArgs();
+
         $object = new self();
         $object->setMessage($message);
         $object->setTags($incomingMessage->getTags());

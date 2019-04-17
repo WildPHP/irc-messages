@@ -53,7 +53,7 @@ class Account extends BaseIRCMessageImplementation implements IncomingMessageInt
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $accountName = $incomingMessage->getArgs()[0];
+        [$accountName] = $incomingMessage->getArgs();
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
 
         $object = new self($accountName);

@@ -59,9 +59,7 @@ class Who extends BaseIRCMessageImplementation implements IncomingMessageInterfa
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
-        $args = $incomingMessage->getArgs();
-        $channel = array_shift($args);
-        $options = array_shift($args);
+        [$channel, $options] = $incomingMessage->getArgs();
 
         $object = new self($channel, $options);
         $object->setPrefix($prefix);

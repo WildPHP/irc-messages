@@ -72,11 +72,7 @@ class User extends BaseIRCMessageImplementation implements IncomingMessageInterf
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingMessage->getArgs();
-        $username = array_shift($args);
-        $hostname = array_shift($args);
-        $servername = array_shift($args);
-        $realname = array_shift($args);
+        [$username, $hostname, $servername, $realname] = $incomingMessage->getArgs();
 
         $object = new self($username, $hostname, $servername, $realname);
         $object->setTags($incomingMessage->getTags());

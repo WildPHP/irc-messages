@@ -41,10 +41,7 @@ class EndOfNames extends BaseIRCMessageImplementation implements IncomingMessage
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
-        $channel = array_shift($args);
-        $message = array_shift($args);
+        [$nickname, $channel, $message] = $incomingMessage->getArgs();
 
         $object = new self();
         $object->setNickname($nickname);

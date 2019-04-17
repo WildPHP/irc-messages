@@ -66,11 +66,7 @@ class Kick extends BaseIRCMessageImplementation implements IncomingMessageInterf
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
-
-        $args = $incomingMessage->getArgs();
-        $channel = $args[0];
-        $target = $args[1];
-        $message = $args[2];
+        [$channel, $target, $message] = $incomingMessage->getArgs();
 
         $object = new self($channel, $target, $message);
         $object->setPrefix($prefix);

@@ -61,8 +61,7 @@ class Notice extends BaseIRCMessageImplementation implements IncomingMessageInte
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
-        $channel = $incomingMessage->getArgs()[0];
-        $message = $incomingMessage->getArgs()[1];
+        [$channel, $message] = $incomingMessage->getArgs();
 
         $object = new self($channel, $message);
         $object->setPrefix($prefix);

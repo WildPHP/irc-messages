@@ -40,8 +40,7 @@ class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInt
             throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
-        $nickname = $incomingMessage->getArgs()[0];
-        $message = $incomingMessage->getArgs()[1];
+        [$nickname, $message] = $incomingMessage->getArgs();
         $server = $incomingMessage->getPrefix();
 
         $object = new self();

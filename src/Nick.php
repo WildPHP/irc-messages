@@ -58,12 +58,11 @@ class Nick extends BaseIRCMessageImplementation implements IncomingMessageInterf
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
-        $nickname = $prefix->getNickname();
-        $newNickname = $incomingMessage->getArgs()[0];
+        [$newNickname] = $incomingMessage->getArgs();
 
         $object = new self($newNickname);
         $object->setPrefix($prefix);
-        $object->setNickname($nickname);
+        $object->setNickname($prefix->getNickname());
         $object->setTags($incomingMessage->getTags());
 
         return $object;

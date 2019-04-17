@@ -45,11 +45,8 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
         }
 
         $server = $incomingMessage->getPrefix();
-        $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
-        $visibility = array_shift($args);
-        $channel = array_shift($args);
-        $nicknames = explode(' ', array_shift($args));
+        [$nickname, $visibility, $channel, $nicknames] = $incomingMessage->getArgs();
+        $nicknames = explode(' ', $nicknames);
 
         $object = new self();
         $object->setNickname($nickname);

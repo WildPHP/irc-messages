@@ -68,13 +68,7 @@ class WhosPcRpl extends BaseIRCMessageImplementation implements IncomingMessageI
         }
 
         $server = $incomingMessage->getPrefix();
-        $args = $incomingMessage->getArgs();
-        $ownNickname = array_shift($args);
-        $username = array_shift($args);
-        $hostname = array_shift($args);
-        $nickname = array_shift($args);
-        $status = array_shift($args);
-        $accountname = array_shift($args);
+        [$ownNickname, $username, $hostname, $nickname, $status, $accountname] = $incomingMessage->getArgs();
 
         $object = new self();
         $object->setOwnNickname($ownNickname);
