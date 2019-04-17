@@ -56,3 +56,7 @@ fabric.properties
 # Composer
 composer.phar
 /vendor/
+
+# WildPHP output & configuration
+cloverCoverage.xml
+.php_cs.cache
