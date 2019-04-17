@@ -54,8 +54,8 @@ class Who extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);

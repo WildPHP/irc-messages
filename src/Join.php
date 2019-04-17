@@ -69,7 +69,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
             $keys = [$keys];
         }
 
-        if (!empty($keys) && count($channels) != count($keys)) {
+        if (!empty($keys) && count($channels) !== count($keys)) {
             throw new InvalidArgumentException('Channel and key count mismatch');
         }
 
@@ -84,7 +84,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
             throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 

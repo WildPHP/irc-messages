@@ -46,8 +46,8 @@ class Ping extends BaseIRCMessageImplementation implements IncomingMessageInterf
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $args = $incomingMessage->getArgs();

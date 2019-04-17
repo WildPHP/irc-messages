@@ -38,8 +38,8 @@ class Topic extends BaseIRCMessageImplementation implements IncomingMessageInter
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $server = $incomingMessage->getPrefix();

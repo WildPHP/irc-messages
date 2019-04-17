@@ -74,13 +74,13 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
             throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         $args = $incomingMessage->getArgs();
-        $isFinal = count($args) == 3;
+        $isFinal = count($args) === 3;
         $clientIdentifier = array_shift($args);
         $command = array_shift($args);
 

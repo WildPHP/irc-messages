@@ -48,7 +48,7 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
             throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
