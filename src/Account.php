@@ -37,7 +37,7 @@ class Account extends BaseIRCMessageImplementation implements IncomingMessageInt
      *
      * @param string $accountName
      */
-    function __construct(string $accountName)
+    public function __construct(string $accountName)
     {
         $this->setAccountName($accountName);
     }
