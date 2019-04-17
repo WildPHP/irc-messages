@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Traits;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Traits;
 
 trait MessageTrait
 {
@@ -24,7 +25,7 @@ trait MessageTrait
     /**
      * @param string $message
      */
-    public function setMessage(string $message)
+    public function setMessage(string $message): void
     {
         $this->message = $message;
     }

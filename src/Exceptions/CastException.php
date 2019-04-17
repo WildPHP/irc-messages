@@ -6,10 +6,13 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\Exceptions;
 
+use Exception;
 
-class CastException extends \Exception
+class CastException extends Exception
 {
 
 }

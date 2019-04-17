@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\WhoWas;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\WhoWas;
 
 class WhoWasTest extends TestCase
 {

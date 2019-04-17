@@ -6,8 +6,11 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\RPL;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -36,12 +39,15 @@ class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInt
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
-        $nickname = $incomingMessage->getArgs()[0];
-        $message = $incomingMessage->getArgs()[1];
+        [$nickname, $message] = $incomingMessage->getArgs();
         $server = $incomingMessage->getPrefix();
 
         $object = new self();

@@ -6,6 +6,8 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages;
 
 use InvalidArgumentException;
@@ -31,6 +33,14 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 {
     use PrefixTrait;
 
+    /**
+     * @var array
+     */
+    public static $allowedSubCommands = ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL'];
+
+    /**
+     * @var string
+     */
     protected static $verb = 'CAP';
 
     /**
@@ -74,18 +84,23 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         $args = $incomingMessage->getArgs();
-        $isFinal = count($args) == 3;
+        $isFinal = count($args) === 3;
         $clientIdentifier = array_shift($args);
         $command = array_shift($args);
 
-        if (!$isFinal)
+        if (!$isFinal) {
             array_shift($args);
+        }
 
         $capabilities = explode(' ', trim(array_shift($args)));
 
@@ -110,7 +125,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function setCommand(string $command)
     {
-        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
+        if (!in_array($command, self::$allowedSubCommands, true) && preg_match('/^LS \d{3}$/', $command) === 0) {
             throw new InvalidArgumentException('Cap sub-command not valid');
         }
 

@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Interfaces;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Interfaces;
 
 interface IrcMessageImplementationInterface
 {

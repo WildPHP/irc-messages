@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -7,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages;
+declare(strict_types=1);
 
+namespace WildPHP\Messages;
 
 use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
@@ -69,7 +69,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
             $keys = [$keys];
         }
 
-        if (!empty($keys) && count($channels) != count($keys)) {
+        if (!empty($keys) && count($channels) !== count($keys)) {
             throw new InvalidArgumentException('Channel and key count mismatch');
         }
 
@@ -84,8 +84,12 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);

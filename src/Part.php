@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -7,9 +6,11 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages;
 
-
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
@@ -61,8 +62,12 @@ class Part extends BaseIRCMessageImplementation implements IncomingMessageInterf
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);

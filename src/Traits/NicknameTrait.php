@@ -6,6 +6,8 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\Traits;
 
 trait NicknameTrait
@@ -23,7 +25,7 @@ trait NicknameTrait
     /**
      * @param string $nickname
      */
-    public function setNickname(string $nickname)
+    public function setNickname(string $nickname): void
     {
         $this->nickname = $nickname;
     }

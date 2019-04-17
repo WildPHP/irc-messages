@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
@@ -32,7 +33,7 @@ class PrefixTest extends TestCase
         $this->assertEquals('username', $prefix->getUsername());
         $this->assertEquals('hostname', $prefix->getHostname());
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Prefix::fromString('nickname!');
     }
 

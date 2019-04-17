@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Traits;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Traits;
 
 trait ChannelsTrait
 {
@@ -24,7 +25,7 @@ trait ChannelsTrait
     /**
      * @param array $channels
      */
-    public function setChannels(array $channels)
+    public function setChannels(array $channels): void
     {
         $this->channels = $channels;
     }

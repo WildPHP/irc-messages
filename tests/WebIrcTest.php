@@ -19,13 +19,13 @@ class WebIrcTest extends TestCase
         $this->assertEquals('password', $webIrc->getPassword());
         $this->assertEquals('gateway', $webIrc->getGateway());
         $this->assertEquals('hostname', $webIrc->getHostname());
-        $this->assertEquals('ip', $webIrc->getIp());
+        $this->assertEquals('ip', $webIrc->getIpAddress());
 
         $expected = 'WEBIRC password gateway hostname ip';
         $this->assertEquals($expected, $webIrc->__toString());
     }
 
-    public function testGetSetPassword()
+    public function testGetSetPassword(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('password', $webIrc->getPassword());
@@ -34,7 +34,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals('hunter2', $webIrc->getPassword());
     }
 
-    public function testGetSetGateway()
+    public function testGetSetGateway(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('gateway', $webIrc->getGateway());
@@ -43,7 +43,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals('gateway2', $webIrc->getGateway());
     }
 
-    public function testGetSetHostname()
+    public function testGetSetHostname(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('hostname', $webIrc->getHostname());
@@ -52,12 +52,12 @@ class WebIrcTest extends TestCase
         $this->assertEquals('hostname2', $webIrc->getHostname());
     }
 
-    public function testGetSetIp()
+    public function testGetSetIp(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
-        $this->assertEquals('ip', $webIrc->getIp());
+        $this->assertEquals('ip', $webIrc->getIpAddress());
 
-        $webIrc->setIp('ip2');
-        $this->assertEquals('ip2', $webIrc->getIp());
+        $webIrc->setIpAddress('ip2');
+        $this->assertEquals('ip2', $webIrc->getIpAddress());
     }
 }

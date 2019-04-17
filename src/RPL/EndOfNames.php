@@ -6,8 +6,11 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\RPL;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -33,18 +36,19 @@ class EndOfNames extends BaseIRCMessageImplementation implements IncomingMessage
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
-        $args = $incomingMessage->getArgs();
-        $nickname = array_shift($args);
-        $channel = array_shift($args);
-        $message = array_shift($args);
+        [$nickname, $channel, $message] = $incomingMessage->getArgs();
 
         $object = new self();
         $object->setNickname($nickname);

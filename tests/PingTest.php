@@ -8,9 +8,10 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Ping;
-use PHPUnit\Framework\TestCase;
 
 class PingTest extends TestCase
 {
@@ -43,7 +44,7 @@ class PingTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Ping::fromIncomingMessage($incomingIrcMessage);
     }
 }

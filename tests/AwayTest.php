@@ -8,8 +8,9 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Away;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Away;
 use WildPHP\Messages\Generics\IrcMessage;
 
 class AwayTest extends TestCase
@@ -43,7 +44,7 @@ class AwayTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Away::fromIncomingMessage($incomingIrcMessage);
     }
 }

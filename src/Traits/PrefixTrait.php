@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Traits;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Traits;
 
 use WildPHP\Messages\Interfaces\PrefixInterface;
 
@@ -16,7 +17,7 @@ trait PrefixTrait
     /**
      * @var PrefixInterface
      */
-    protected $prefix = null;
+    protected $prefix;
 
     /**
      * @return PrefixInterface
@@ -29,7 +30,7 @@ trait PrefixTrait
     /**
      * @param PrefixInterface $prefix
      */
-    public function setPrefix(PrefixInterface $prefix)
+    public function setPrefix(PrefixInterface $prefix): void
     {
         $this->prefix = $prefix;
     }

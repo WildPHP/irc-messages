@@ -6,8 +6,11 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\RPL;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -38,8 +41,12 @@ class ISupport extends BaseIRCMessageImplementation implements IncomingMessageIn
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $args = $incomingMessage->getArgs();
@@ -48,7 +55,7 @@ class ISupport extends BaseIRCMessageImplementation implements IncomingMessageIn
         $message = array_pop($args);
 
         $variables = [];
-        foreach ($args as $arrayKey => $value) {
+        foreach ($args as $value) {
             $parts = explode('=', $value);
             $key = strtolower($parts[0]);
             $value = !empty($parts[1]) ? $parts[1] : true;

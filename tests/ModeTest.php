@@ -8,10 +8,11 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Mode;
-use PHPUnit\Framework\TestCase;
 
 class ModeTest extends TestCase
 {
@@ -50,7 +51,7 @@ class ModeTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Mode::fromIncomingMessage($incomingIrcMessage);
     }
 

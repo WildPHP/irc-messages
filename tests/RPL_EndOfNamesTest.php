@@ -8,9 +8,10 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\RPL\EndOfNames;
-use PHPUnit\Framework\TestCase;
 
 class RPL_EndOfNamesTest extends TestCase
 {
@@ -33,7 +34,7 @@ class RPL_EndOfNamesTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         EndOfNames::fromIncomingMessage($incomingIrcMessage);
     }
 }

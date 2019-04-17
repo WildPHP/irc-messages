@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Generics;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Generics;
 
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 
@@ -60,7 +61,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param string $prefix
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(string $prefix): void
     {
         $this->prefix = $prefix;
     }
@@ -76,7 +77,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param string $verb
      */
-    public function setVerb(string $verb)
+    public function setVerb(string $verb): void
     {
         $this->verb = $verb;
     }
@@ -92,7 +93,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param array $args
      */
-    public function setArgs(array $args)
+    public function setArgs(array $args): void
     {
         $this->args = $args;
     }

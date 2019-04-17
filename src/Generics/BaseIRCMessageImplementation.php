@@ -6,6 +6,8 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\Generics;
 
 use WildPHP\Messages\Interfaces\IrcMessageImplementationInterface;
@@ -42,7 +44,7 @@ abstract class BaseIRCMessageImplementation implements IrcMessageImplementationI
     /**
      * @param array $tags
      */
-    public function setTags(array $tags)
+    public function setTags(array $tags): void
     {
         $this->tags = $tags;
     }

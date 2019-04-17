@@ -6,6 +6,8 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\Interfaces;
 
 interface IrcMessageInterface
@@ -18,7 +20,7 @@ interface IrcMessageInterface
     /**
      * @param string $prefix
      */
-    public function setPrefix(string $prefix);
+    public function setPrefix(string $prefix): void;
 
     /**
      * @return string
@@ -28,7 +30,7 @@ interface IrcMessageInterface
     /**
      * @param string $verb
      */
-    public function setVerb(string $verb);
+    public function setVerb(string $verb): void;
 
     /**
      * @return array
@@ -38,7 +40,7 @@ interface IrcMessageInterface
     /**
      * @param array $args
      */
-    public function setArgs(array $args);
+    public function setArgs(array $args): void;
 
     /**
      * @return array

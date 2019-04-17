@@ -1,11 +1,12 @@
 <?php
-
 /**
  * Copyright 2019 The WildPHP Team
  *
  * You should have received a copy of the MIT license with the project.
  * See the LICENSE file for more information.
  */
+
+declare(strict_types=1);
 
 namespace WildPHP\Messages;
 
@@ -48,10 +49,15 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+        if ($incomingMessage->getVerb() !== self::getVerb()) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
-        $response = $incomingMessage->getArgs()[0];
+
+        [$response] = $incomingMessage->getArgs();
 
         $object = new self($response);
         $object->setTags($incomingMessage->getTags());

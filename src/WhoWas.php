@@ -6,6 +6,8 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages;
 
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
@@ -55,7 +57,7 @@ class WhoWas extends BaseIRCMessageImplementation implements OutgoingMessageInte
     /**
      * @return string[]
      */
-    public function getNicknames()
+    public function getNicknames(): array
     {
         return $this->nicknames;
     }

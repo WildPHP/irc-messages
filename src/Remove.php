@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -7,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages;
+declare(strict_types=1);
 
+namespace WildPHP\Messages;
 
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;

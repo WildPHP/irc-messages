@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Utility;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Utility;
 
 use WildPHP\Messages\RPL\EndOfNames;
 use WildPHP\Messages\RPL\ISupport;

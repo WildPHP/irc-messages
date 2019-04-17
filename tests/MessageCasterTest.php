@@ -4,6 +4,7 @@
  * You should have received a copy of the MIT license with the project.
  * See the LICENSE file for more information.
  */
+
 /** @noinspection PhpUnhandledExceptionInspection */
 
 use PHPUnit\Framework\TestCase;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2019 The WildPHP Team
  *
@@ -7,8 +6,11 @@
  * See the LICENSE file for more information.
  */
 
+declare(strict_types=1);
+
 namespace WildPHP\Messages\Generics;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\PrefixInterface;
 
@@ -59,7 +61,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $nickname
      */
-    public function setNickname(string $nickname)
+    public function setNickname(string $nickname): void
     {
         $this->nickname = $nickname;
     }
@@ -75,7 +77,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $username
      */
-    public function setUsername(string $username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -91,7 +93,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $hostname
      */
-    public function setHostname(string $hostname)
+    public function setHostname(string $hostname): void
     {
         $this->hostname = $hostname;
     }
@@ -103,8 +105,8 @@ class Prefix implements PrefixInterface
      */
     public static function fromString(string $prefix): PrefixInterface
     {
-        if (preg_match(self::$regex, $prefix, $matches) == false) {
-            throw new \InvalidArgumentException('Got invalid prefix');
+        if (preg_match(self::$regex, $prefix, $matches) === 0) {
+            throw new InvalidArgumentException('Got invalid prefix');
         }
 
         $nickname = $matches['nick'] ?? '';

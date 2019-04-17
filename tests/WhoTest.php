@@ -8,10 +8,11 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Who;
-use PHPUnit\Framework\TestCase;
 
 class WhoTest extends TestCase
 {
@@ -48,7 +49,7 @@ class WhoTest extends TestCase
         $args = ['argument'];
         $incoming = new IrcMessage($prefix, $verb, $args);
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Who::fromIncomingMessage($incoming);
     }
 }

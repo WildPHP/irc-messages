@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Names;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Names;
 
 class NamesTest extends TestCase
 {

@@ -6,8 +6,9 @@
  * See the LICENSE file for more information.
  */
 
-namespace WildPHP\Messages\Traits;
+declare(strict_types=1);
 
+namespace WildPHP\Messages\Traits;
 
 trait ServerTrait
 {
@@ -24,7 +25,7 @@ trait ServerTrait
     /**
      * @param string $server
      */
-    public function setServer(string $server)
+    public function setServer(string $server): void
     {
         $this->server = $server;
     }
