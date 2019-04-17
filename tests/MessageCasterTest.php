@@ -7,17 +7,21 @@
 /** @noinspection PhpUnhandledExceptionInspection */
 
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Exceptions\CastException;
+use WildPHP\Messages\Generics\IrcMessage;
+use WildPHP\Messages\Generics\Prefix;
+use WildPHP\Messages\Privmsg;
+use WildPHP\Messages\RPL\Topic;
 use WildPHP\Messages\Utility\MessageCaster;
 
 class MessageCasterTest extends TestCase
 {
-
     public function testCastMessage(): void
     {
-        $expected = new \WildPHP\Messages\Privmsg('#channel', 'Message');
-        $expected->setPrefix(new \WildPHP\Messages\Generics\Prefix());
+        $expected = new Privmsg('#channel', 'Message');
+        $expected->setPrefix(new Prefix());
 
-        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'PRIVMSG', ['#channel', 'Message']);
+        $incoming = new IrcMessage('', 'PRIVMSG', ['#channel', 'Message']);
         $outcome = MessageCaster::castMessage($incoming);
 
         $this->assertEquals($expected, $outcome);
@@ -25,25 +29,25 @@ class MessageCasterTest extends TestCase
 
     public function testCastMessageInvalidClass(): void
     {
-        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'Generics\\BaseIRCMessage');
+        $incoming = new IrcMessage('', 'Generics\\IRCMessage');
 
-        $this->expectException(\WildPHP\Messages\Exceptions\CastException::class);
+        $this->expectException(CastException::class);
         MessageCaster::castMessage($incoming);
     }
 
     public function testCastMessageClassNotFound(): void
     {
-        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', 'FOO');
+        $incoming = new IrcMessage('', 'FOO');
 
-        $this->expectException(\WildPHP\Messages\Exceptions\CastException::class);
+        $this->expectException(CastException::class);
         MessageCaster::castMessage($incoming);
     }
 
     public function testCastNumericVerbMessage(): void
     {
-        $expected = new \WildPHP\Messages\RPL\Topic();
+        $expected = new Topic();
 
-        $incoming = new \WildPHP\Messages\Generics\IrcMessage('', '332', ['', '', '']);
+        $incoming = new IrcMessage('', '332', ['', '', '']);
         $outcome = MessageCaster::castMessage($incoming);
 
         $this->assertEquals($expected, $outcome);
