@@ -31,6 +31,14 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
 {
     use PrefixTrait;
 
+    /**
+     * @var array
+     */
+    public static $allowedSubCommands = ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL'];
+
+    /**
+     * @var string
+     */
     protected static $verb = 'CAP';
 
     /**
@@ -111,7 +119,8 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function setCommand(string $command)
     {
-        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
+        if (!in_array($command, self::$allowedSubCommands) && preg_match('/^LS \d{3}$/',
+                $command) === 0) {
             throw new InvalidArgumentException('Cap sub-command not valid');
         }
 
