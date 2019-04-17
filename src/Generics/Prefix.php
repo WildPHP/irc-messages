@@ -104,7 +104,7 @@ class Prefix implements PrefixInterface
      */
     public static function fromString(string $prefix): PrefixInterface
     {
-        if (preg_match(self::$regex, $prefix, $matches) === false) {
+        if (preg_match(self::$regex, $prefix, $matches) === 0) {
             throw new InvalidArgumentException('Got invalid prefix');
         }
 
