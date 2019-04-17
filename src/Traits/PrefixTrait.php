@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Traits;
 
-
 use WildPHP\Messages\Interfaces\PrefixInterface;
 
 trait PrefixTrait

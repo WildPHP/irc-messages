@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Interfaces;
 
-
 interface IrcMessageImplementationInterface
 {
     /**

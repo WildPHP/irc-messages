@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Traits;
 
-
 trait ChannelsTrait
 {
     protected $channels = [];

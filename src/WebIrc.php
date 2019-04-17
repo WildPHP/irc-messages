@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages;
 
-
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 
@@ -30,21 +29,21 @@ class WebIrc extends BaseIRCMessageImplementation implements OutgoingMessageInte
 
     protected $hostname = '';
 
-    protected $ip = '';
+    protected $ipAddress = '';
 
     /**
      * WebIrc constructor.
      * @param string $password
      * @param string $gateway
      * @param string $hostname
-     * @param string $ip
+     * @param string $ipAddress
      */
-    public function __construct(string $password, string $gateway, string $hostname, string $ip)
+    public function __construct(string $password, string $gateway, string $hostname, string $ipAddress)
     {
         $this->password = $password;
         $this->gateway = $gateway;
         $this->hostname = $hostname;
-        $this->ip = $ip;
+        $this->ipAddress = $ipAddress;
     }
 
     /**
@@ -98,17 +97,17 @@ class WebIrc extends BaseIRCMessageImplementation implements OutgoingMessageInte
     /**
      * @return string
      */
-    public function getIp(): string
+    public function getIpAddress(): string
     {
-        return $this->ip;
+        return $this->ipAddress;
     }
 
     /**
-     * @param string $ip
+     * @param string $ipAddress
      */
-    public function setIp(string $ip): void
+    public function setIpAddress(string $ipAddress): void
     {
-        $this->ip = $ip;
+        $this->ipAddress = $ipAddress;
     }
 
     /**
@@ -116,10 +115,12 @@ class WebIrc extends BaseIRCMessageImplementation implements OutgoingMessageInte
      */
     public function __toString()
     {
-        return sprintf('WEBIRC %s %s %s %s',
+        return sprintf(
+            'WEBIRC %s %s %s %s',
             $this->getPassword(),
             $this->getGateway(),
             $this->getHostname(),
-            $this->getIp());
+            $this->getIpAddress()
+        );
     }
 }

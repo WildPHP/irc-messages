@@ -42,7 +42,11 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() !== self::getVerb()) {
-            throw new InvalidArgumentException(sprintf('Expected incoming %s; got %s', self::getVerb(), $incomingMessage->getVerb()));
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $server = $incomingMessage->getPrefix();

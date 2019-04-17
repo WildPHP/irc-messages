@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Generics;
 
-
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 
 class IrcMessage implements IrcMessageInterface

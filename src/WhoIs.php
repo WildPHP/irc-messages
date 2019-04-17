@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages;
 
-
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\OutgoingMessageInterface;
 use WildPHP\Messages\Traits\ServerTrait;

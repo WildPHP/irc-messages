@@ -9,7 +9,6 @@
 
 namespace WildPHP\Messages\Interfaces;
 
-
 /**
  * Interface ReceivableMessage
  * @package WildPHP\Messages

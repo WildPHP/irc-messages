@@ -65,7 +65,11 @@ class Privmsg extends BaseIRCMessageImplementation implements IncomingMessageInt
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() !== self::getVerb()) {
-            throw new InvalidArgumentException(sprintf('Expected incoming %s; got %s', self::getVerb(), $incomingMessage->getVerb()));
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);

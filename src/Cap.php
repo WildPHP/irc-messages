@@ -83,7 +83,11 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() !== self::getVerb()) {
-            throw new InvalidArgumentException(sprintf('Expected incoming %s; got %s', self::getVerb(), $incomingMessage->getVerb()));
+            throw new InvalidArgumentException(sprintf(
+                'Expected incoming %s; got %s',
+                self::getVerb(),
+                $incomingMessage->getVerb()
+            ));
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
@@ -119,8 +123,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function setCommand(string $command)
     {
-        if (!in_array($command, self::$allowedSubCommands) && preg_match('/^LS \d{3}$/',
-                $command) === 0) {
+        if (!in_array($command, self::$allowedSubCommands, true) && preg_match('/^LS \d{3}$/', $command) === 0) {
             throw new InvalidArgumentException('Cap sub-command not valid');
         }
 

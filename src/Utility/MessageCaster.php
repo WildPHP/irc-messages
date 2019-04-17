@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Utility;
 
-
 use ReflectionClass;
 use ReflectionException;
 use WildPHP\Messages\Exceptions\CastException;
@@ -42,7 +41,8 @@ class MessageCaster
 
         $reflection = new ReflectionClass($expectedClass);
 
-        if (!$reflection->implementsInterface(IncomingMessageInterface::class) && !$reflection->implementsInterface(OutgoingMessageInterface::class)) {
+        if (!$reflection->implementsInterface(IncomingMessageInterface::class) &&
+            !$reflection->implementsInterface(OutgoingMessageInterface::class)) {
             throw new CastException('The class ' . $expectedClass . ' does not implement a message interface.');
         }
 

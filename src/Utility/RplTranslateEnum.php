@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Utility;
 
-
 use WildPHP\Messages\RPL\EndOfNames;
 use WildPHP\Messages\RPL\ISupport;
 use WildPHP\Messages\RPL\NamReply;

@@ -8,7 +8,6 @@
 
 namespace WildPHP\Messages\Exceptions;
 
-
 use Exception;
 
 class CastException extends Exception
