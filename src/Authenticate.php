@@ -9,6 +9,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -48,7 +49,7 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
         $response = $incomingMessage->getArgs()[0];
 
@@ -79,6 +80,6 @@ class Authenticate extends BaseIRCMessageImplementation implements IncomingMessa
      */
     public function __toString()
     {
-        return 'Authenticate ' . $this->getResponse() . "\r\n";
+        return 'AUTHENTICATE ' . $this->getResponse() . "\r\n";
     }
 }

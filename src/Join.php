@@ -10,6 +10,7 @@
 namespace WildPHP\Messages;
 
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
@@ -69,7 +70,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
         }
 
         if (!empty($keys) && count($channels) != count($keys)) {
-            throw new \InvalidArgumentException('Channel and key count mismatch');
+            throw new InvalidArgumentException('Channel and key count mismatch');
         }
 
         $this->setChannels($channels);
@@ -84,7 +85,7 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
@@ -159,6 +160,6 @@ class Join extends BaseIRCMessageImplementation implements IncomingMessageInterf
         $channels = implode(',', $this->getChannels());
         $keys = implode(',', $this->getKeys());
 
-        return 'Join ' . $channels . (!empty($keys) ? ' ' . $keys : '') . "\r\n";
+        return 'JOIN ' . $channels . (!empty($keys) ? ' ' . $keys : '') . "\r\n";
     }
 }

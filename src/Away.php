@@ -8,6 +8,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
@@ -45,12 +46,12 @@ class Away extends BaseIRCMessageImplementation implements IncomingMessageInterf
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
@@ -70,6 +71,6 @@ class Away extends BaseIRCMessageImplementation implements IncomingMessageInterf
      */
     public function __toString()
     {
-        return 'Away :' . $this->getMessage() . "\r\n";
+        return 'AWAY :' . $this->getMessage() . "\r\n";
     }
 }

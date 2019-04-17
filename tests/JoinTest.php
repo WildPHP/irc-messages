@@ -9,18 +9,12 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Join;
-use PHPUnit\Framework\TestCase;
 
 class JoinTest extends TestCase
 {
-
-    public function testGetRealname(): void
-    {
-
-    }
-
     public function testJoinCreateKeyMismatch(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -50,11 +44,6 @@ class JoinTest extends TestCase
 
         $expected = 'JOIN #channel1,#channel2 key1,key2' . "\r\n";
         $this->assertEquals($expected, $join->__toString());
-    }
-
-    public function testGetIrcAccount(): void
-    {
-
     }
 
     public function testFromIncomingMessageExtended(): void
@@ -91,12 +80,7 @@ class JoinTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Join::fromIncomingMessage($incomingIrcMessage);
-    }
-
-    public function testGetKeys(): void
-    {
-
     }
 }
