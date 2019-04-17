@@ -29,7 +29,7 @@ trait PrefixTrait
     /**
      * @param PrefixInterface $prefix
      */
-    public function setPrefix(PrefixInterface $prefix)
+    public function setPrefix(PrefixInterface $prefix): void
     {
         $this->prefix = $prefix;
     }

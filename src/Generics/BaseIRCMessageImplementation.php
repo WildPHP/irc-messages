@@ -42,7 +42,7 @@ abstract class BaseIRCMessageImplementation implements IrcMessageImplementationI
     /**
      * @param array $tags
      */
-    public function setTags(array $tags)
+    public function setTags(array $tags): void
     {
         $this->tags = $tags;
     }

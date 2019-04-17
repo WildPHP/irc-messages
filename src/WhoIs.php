@@ -49,7 +49,7 @@ class WhoIs extends BaseIRCMessageImplementation implements OutgoingMessageInter
     /**
      * @return string[]
      */
-    public function getNicknames()
+    public function getNicknames(): array
     {
         return $this->nicknames;
     }

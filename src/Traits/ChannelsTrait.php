@@ -24,7 +24,7 @@ trait ChannelsTrait
     /**
      * @param array $channels
      */
-    public function setChannels(array $channels)
+    public function setChannels(array $channels): void
     {
         $this->channels = $channels;
     }

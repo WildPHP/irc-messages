@@ -23,7 +23,7 @@ trait ChannelTrait
     /**
      * @param string $channel
      */
-    public function setChannel(string $channel)
+    public function setChannel(string $channel): void
     {
         $this->channel = $channel;
     }

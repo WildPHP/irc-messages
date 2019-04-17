@@ -24,7 +24,7 @@ trait ServerTrait
     /**
      * @param string $server
      */
-    public function setServer(string $server)
+    public function setServer(string $server): void
     {
         $this->server = $server;
     }

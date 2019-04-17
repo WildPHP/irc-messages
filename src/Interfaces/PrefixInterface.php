@@ -18,7 +18,7 @@ interface PrefixInterface
     /**
      * @param string $nickname
      */
-    public function setNickname(string $nickname);
+    public function setNickname(string $nickname): void;
 
     /**
      * @return string
@@ -28,7 +28,7 @@ interface PrefixInterface
     /**
      * @param string $username
      */
-    public function setUsername(string $username);
+    public function setUsername(string $username): void;
 
     /**
      * @return string
@@ -38,5 +38,5 @@ interface PrefixInterface
     /**
      * @param string $hostname
      */
-    public function setHostname(string $hostname);
+    public function setHostname(string $hostname): void;
 }

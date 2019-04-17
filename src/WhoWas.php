@@ -55,7 +55,7 @@ class WhoWas extends BaseIRCMessageImplementation implements OutgoingMessageInte
     /**
      * @return string[]
      */
-    public function getNicknames()
+    public function getNicknames(): array
     {
         return $this->nicknames;
     }

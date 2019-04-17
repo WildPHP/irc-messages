@@ -60,7 +60,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param string $prefix
      */
-    public function setPrefix(string $prefix)
+    public function setPrefix(string $prefix): void
     {
         $this->prefix = $prefix;
     }
@@ -76,7 +76,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param string $verb
      */
-    public function setVerb(string $verb)
+    public function setVerb(string $verb): void
     {
         $this->verb = $verb;
     }
@@ -92,7 +92,7 @@ class IrcMessage implements IrcMessageInterface
     /**
      * @param array $args
      */
-    public function setArgs(array $args)
+    public function setArgs(array $args): void
     {
         $this->args = $args;
     }

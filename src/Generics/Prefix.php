@@ -59,7 +59,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $nickname
      */
-    public function setNickname(string $nickname)
+    public function setNickname(string $nickname): void
     {
         $this->nickname = $nickname;
     }
@@ -75,7 +75,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $username
      */
-    public function setUsername(string $username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -91,7 +91,7 @@ class Prefix implements PrefixInterface
     /**
      * @param string $hostname
      */
-    public function setHostname(string $hostname)
+    public function setHostname(string $hostname): void
     {
         $this->hostname = $hostname;
     }

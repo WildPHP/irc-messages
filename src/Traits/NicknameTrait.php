@@ -23,7 +23,7 @@ trait NicknameTrait
     /**
      * @param string $nickname
      */
-    public function setNickname(string $nickname)
+    public function setNickname(string $nickname): void
     {
         $this->nickname = $nickname;
     }
