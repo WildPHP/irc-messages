@@ -14,6 +14,11 @@
       "WildPHP\\Messages\\": "src/"
     }
   },
+  "config": {
+    "platform": {
+      "php": "7.1.0"
+    }
+  },
   "require-dev": {
     "phpunit/phpunit": "^7"
   }
