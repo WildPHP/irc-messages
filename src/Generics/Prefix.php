@@ -103,8 +103,8 @@ class Prefix implements PrefixInterface
      */
     public static function fromString(string $prefix): PrefixInterface
     {
-        if (preg_match(self::$regex, $prefix, $matches) == false) {
-            throw new \InvalidArgumentException('Got invalid prefix');
+        if (preg_match(self::$regex, $prefix, $matches) === false) {
+            throw new InvalidArgumentException('Got invalid prefix');
         }
 
         $nickname = $matches['nick'] ?? '';
