@@ -8,6 +8,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
@@ -61,10 +62,6 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function __construct(string $command, array $capabilities = [], bool $finalMessage = true)
     {
-        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
-            throw new \InvalidArgumentException('Cap sub-command not valid');
-        }
-
         $this->setCommand($command);
         $this->setCapabilities($capabilities);
         $this->finalMessage = $finalMessage;
@@ -78,7 +75,7 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
         if ($incomingMessage->getVerb() != self::getVerb()) {
-            throw new \InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
+            throw new InvalidArgumentException('Expected incoming ' . self::getVerb() . '; got ' . $incomingMessage->getVerb());
         }
 
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
@@ -113,6 +110,10 @@ class Cap extends BaseIRCMessageImplementation implements IncomingMessageInterfa
      */
     public function setCommand(string $command)
     {
+        if (!in_array($command, ['LS', 'LIST', 'REQ', 'ACK', 'NAK', 'END', 'NEW', 'DEL']) && preg_match('/^LS \d{3}$/', $command) === 0) {
+            throw new InvalidArgumentException('Cap sub-command not valid');
+        }
+
         $this->command = $command;
     }
 
