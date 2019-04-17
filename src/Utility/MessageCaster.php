@@ -35,13 +35,13 @@ class MessageCaster
         }
 
         if (!class_exists($expectedClass)) {
-            throw new CastException();
+            throw new CastException('The class ' . $expectedClass . ' does not exist.');
         }
 
         $reflection = new \ReflectionClass($expectedClass);
 
         if (!$reflection->implementsInterface(IncomingMessageInterface::class) && !$reflection->implementsInterface(OutgoingMessageInterface::class)) {
-            throw new CastException();
+            throw new CastException('The class ' . $expectedClass . ' does not implement a message interface.');
         }
 
         /** @noinspection PhpUndefinedMethodInspection */
