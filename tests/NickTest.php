@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Nick;
@@ -46,7 +47,7 @@ class NickTest extends TestCase
         $args = ['argument'];
 
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Nick::fromIncomingMessage($incomingIrcMessage);
     }
 }

@@ -9,6 +9,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;

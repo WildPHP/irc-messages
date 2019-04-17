@@ -9,6 +9,7 @@
 
 namespace WildPHP\Messages\Generics;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Interfaces\PrefixInterface;
 

@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Account;
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
@@ -35,7 +36,7 @@ class AccountTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Account::fromIncomingMessage($incomingIrcMessage);
     }
 

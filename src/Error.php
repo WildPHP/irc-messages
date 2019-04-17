@@ -8,6 +8,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -29,7 +30,7 @@ class Error extends BaseIRCMessageImplementation implements IncomingMessageInter
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {

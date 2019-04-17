@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Authenticate;
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
@@ -32,7 +33,7 @@ class AuthenticateTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Authenticate::fromIncomingMessage($incomingIrcMessage);
     }
 

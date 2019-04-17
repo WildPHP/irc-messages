@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Cap;
 use WildPHP\Messages\Generics\IrcMessage;
@@ -28,7 +29,7 @@ class CapTest extends TestCase
     {
         $cap = new Cap('REQ', ['cap1', 'cap2']);
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $cap->setCommand('TEEHEE');
     }
 
@@ -61,7 +62,7 @@ class CapTest extends TestCase
     {
         new Cap('LS 302');
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         new Cap('INVALID');
     }
@@ -72,7 +73,7 @@ class CapTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         Cap::fromIncomingMessage($incomingIrcMessage);
     }
 

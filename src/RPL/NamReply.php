@@ -8,6 +8,7 @@
 
 namespace WildPHP\Messages\RPL;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;

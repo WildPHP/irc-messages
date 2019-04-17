@@ -8,6 +8,7 @@
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\RPL\NamReply;
 use PHPUnit\Framework\TestCase;
@@ -34,7 +35,7 @@ class RPL_NamReplyTest extends TestCase
         $verb = 'TEEHEE';
         $args = ['argument'];
         $incomingIrcMessage = new IrcMessage($prefix, $verb, $args);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         NamReply::fromIncomingMessage($incomingIrcMessage);
     }
 }

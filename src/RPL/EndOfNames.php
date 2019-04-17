@@ -8,6 +8,7 @@
 
 namespace WildPHP\Messages\RPL;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -33,7 +34,7 @@ class EndOfNames extends BaseIRCMessageImplementation implements IncomingMessage
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {

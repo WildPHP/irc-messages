@@ -9,6 +9,8 @@
 namespace WildPHP\Messages\Utility;
 
 
+use ReflectionClass;
+use ReflectionException;
 use WildPHP\Messages\Exceptions\CastException;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
@@ -20,7 +22,7 @@ class MessageCaster
      * @param IrcMessageInterface $incomingIrcMessage
      *
      * @return OutgoingMessageInterface|IncomingMessageInterface
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws CastException
      */
     public static function castMessage(IrcMessageInterface $incomingIrcMessage)
@@ -38,7 +40,7 @@ class MessageCaster
             throw new CastException('The class ' . $expectedClass . ' does not exist.');
         }
 
-        $reflection = new \ReflectionClass($expectedClass);
+        $reflection = new ReflectionClass($expectedClass);
 
         if (!$reflection->implementsInterface(IncomingMessageInterface::class) && !$reflection->implementsInterface(OutgoingMessageInterface::class)) {
             throw new CastException('The class ' . $expectedClass . ' does not implement a message interface.');

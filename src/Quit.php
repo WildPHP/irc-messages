@@ -9,6 +9,7 @@
 
 namespace WildPHP\Messages;
 
+use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
@@ -46,7 +47,7 @@ class Quit extends BaseIRCMessageImplementation implements IncomingMessageInterf
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
