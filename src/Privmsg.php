@@ -76,7 +76,7 @@ class Privmsg extends BaseIRCMessageImplementation implements IncomingMessageInt
         $prefix = Prefix::fromIncomingMessage($incomingMessage);
         [$channel, $message] = $incomingMessage->getArgs();
 
-        $isCtcp = strpos($message, "\x01") === 0 && substr($message, -1, 1) === "\x01";
+        $isCtcp = strncmp($message, "\x01", 1) === 0 && substr($message, -1, 1) === "\x01";
         $ctcpVerb = false;
 
         if ($isCtcp) {
