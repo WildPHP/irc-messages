@@ -16,7 +16,7 @@ trait PrefixTrait
     /**
      * @var PrefixInterface
      */
-    protected $prefix = null;
+    protected $prefix;
 
     /**
      * @return PrefixInterface
