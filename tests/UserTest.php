@@ -9,9 +9,9 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\User;
-use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {

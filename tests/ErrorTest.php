@@ -9,8 +9,8 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
-use WildPHP\Messages\Error;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Error;
 use WildPHP\Messages\Generics\IrcMessage;
 
 class ErrorTest extends TestCase

@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Pass;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Pass;
 
 class PassTest extends TestCase
 {

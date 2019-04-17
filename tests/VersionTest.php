@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Version;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Version;
 
 class VersionTest extends TestCase
 {

@@ -9,8 +9,8 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
-use WildPHP\Messages\Authenticate;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Authenticate;
 use WildPHP\Messages\Generics\IrcMessage;
 
 class AuthenticateTest extends TestCase

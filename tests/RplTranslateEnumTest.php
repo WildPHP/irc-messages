@@ -8,9 +8,9 @@
 
 namespace WildPHP\Tests;
 
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\RPL\Topic;
 use WildPHP\Messages\Utility\RplTranslateEnum;
-use PHPUnit\Framework\TestCase;
 
 class RplTranslateEnumTest extends TestCase
 {

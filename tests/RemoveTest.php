@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Remove;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Remove;
 
 class RemoveTest extends TestCase
 {

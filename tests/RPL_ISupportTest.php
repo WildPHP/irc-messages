@@ -9,9 +9,9 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\RPL\ISupport;
-use PHPUnit\Framework\TestCase;
 
 class RPL_ISupportTest extends TestCase
 {

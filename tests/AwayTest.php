@@ -9,8 +9,8 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
-use WildPHP\Messages\Away;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Away;
 use WildPHP\Messages\Generics\IrcMessage;
 
 class AwayTest extends TestCase

@@ -9,8 +9,8 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
-use WildPHP\Messages\Account;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Account;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 

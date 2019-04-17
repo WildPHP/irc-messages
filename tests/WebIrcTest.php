@@ -25,7 +25,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals($expected, $webIrc->__toString());
     }
 
-    public function testGetSetPassword()
+    public function testGetSetPassword(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('password', $webIrc->getPassword());
@@ -34,7 +34,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals('hunter2', $webIrc->getPassword());
     }
 
-    public function testGetSetGateway()
+    public function testGetSetGateway(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('gateway', $webIrc->getGateway());
@@ -43,7 +43,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals('gateway2', $webIrc->getGateway());
     }
 
-    public function testGetSetHostname()
+    public function testGetSetHostname(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('hostname', $webIrc->getHostname());
@@ -52,7 +52,7 @@ class WebIrcTest extends TestCase
         $this->assertEquals('hostname2', $webIrc->getHostname());
     }
 
-    public function testGetSetIp()
+    public function testGetSetIp(): void
     {
         $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
         $this->assertEquals('ip', $webIrc->getIpAddress());

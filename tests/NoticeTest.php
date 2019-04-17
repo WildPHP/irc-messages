@@ -9,10 +9,10 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Notice;
-use PHPUnit\Framework\TestCase;
 
 class NoticeTest extends TestCase
 {
@@ -40,6 +40,7 @@ class NoticeTest extends TestCase
         $this->assertEquals('#somechannel', $notice->getChannel());
         $this->assertEquals('This is a test message', $notice->getMessage());
     }
+
     public function testFromIncomingMessageThrowsException(): void
     {
         $prefix = ':server';

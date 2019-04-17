@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\Raw;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\Raw;
 
 class RawTest extends TestCase
 {

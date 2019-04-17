@@ -9,12 +9,12 @@
 namespace WildPHP\Tests;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Generics\IrcMessage;
 use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Privmsg;
-use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase
+class PrivmsgTest extends TestCase
 {
     public function test__toString(): void
     {
