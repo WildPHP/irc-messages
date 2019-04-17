@@ -8,8 +8,8 @@
 
 namespace WildPHP\Tests;
 
-use WildPHP\Messages\WebIrc;
 use PHPUnit\Framework\TestCase;
+use WildPHP\Messages\WebIrc;
 
 class WebIrcTest extends TestCase
 {
@@ -23,5 +23,41 @@ class WebIrcTest extends TestCase
 
         $expected = 'WEBIRC password gateway hostname ip';
         $this->assertEquals($expected, $webIrc->__toString());
+    }
+
+    public function testGetSetPassword()
+    {
+        $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
+        $this->assertEquals('password', $webIrc->getPassword());
+
+        $webIrc->setPassword('hunter2');
+        $this->assertEquals('hunter2', $webIrc->getPassword());
+    }
+
+    public function testGetSetGateway()
+    {
+        $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
+        $this->assertEquals('gateway', $webIrc->getGateway());
+
+        $webIrc->setGateway('gateway2');
+        $this->assertEquals('gateway2', $webIrc->getGateway());
+    }
+
+    public function testGetSetHostname()
+    {
+        $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
+        $this->assertEquals('hostname', $webIrc->getHostname());
+
+        $webIrc->setHostname('hostname2');
+        $this->assertEquals('hostname2', $webIrc->getHostname());
+    }
+
+    public function testGetSetIp()
+    {
+        $webIrc = new WebIrc('password', 'gateway', 'hostname', 'ip');
+        $this->assertEquals('ip', $webIrc->getIp());
+
+        $webIrc->setIp('ip2');
+        $this->assertEquals('ip2', $webIrc->getIp());
     }
 }
