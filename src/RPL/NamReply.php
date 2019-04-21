@@ -12,6 +12,7 @@ namespace WildPHP\Messages\RPL;
 
 use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
+use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
@@ -23,6 +24,7 @@ use WildPHP\Messages\Traits\ServerTrait;
  * @package WildPHP\Messages
  *
  * Syntax: :server 353 nickname visibility channel :nicknames
+ * Syntax (userhost-in-names): :server 353 nickname visibility channel :prefixes
  */
 class NamReply extends BaseIRCMessageImplementation implements IncomingMessageInterface
 {
@@ -32,9 +34,22 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
 
     protected static $verb = '353';
 
+    /**
+     * @var string
+     */
     protected $visibility = '';
 
+    /**
+     * @var array
+     */
     protected $nicknames = [];
+
+    /**
+     * @var array
+     *
+     * Format: <nickname, Prefix>
+     */
+    protected $prefixes = [];
 
     /**
      * @param IrcMessageInterface $incomingMessage
@@ -55,11 +70,27 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
         [$nickname, $visibility, $channel, $nicknames] = $incomingMessage->getArgs();
         $nicknames = explode(' ', $nicknames);
 
+        $prefixes = [];
+        foreach ($nicknames as $key => $prefixString) {
+            $prefix = Prefix::fromString($prefixString);
+
+            // no nickname means this isn't a full prefix. do not try any further.
+            if (empty($prefix->getNickname())) {
+                break;
+            }
+
+            $prefixes[$prefix->getNickname()] = $prefix;
+
+            // override the original nickname with the parsed result.
+            $nicknames[$key] = $prefix->getNickname();
+        }
+
         $object = new self();
         $object->setNickname($nickname);
         $object->setVisibility($visibility);
         $object->setChannel($channel);
         $object->setNicknames($nicknames);
+        $object->setPrefixes($prefixes);
         $object->setServer($server);
         $object->setTags($incomingMessage->getTags());
 
@@ -96,5 +127,21 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
     public function setNicknames(array $nicknames)
     {
         $this->nicknames = $nicknames;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPrefixes(): array
+    {
+        return $this->prefixes;
+    }
+
+    /**
+     * @param array $prefixes
+     */
+    public function setPrefixes(array $prefixes): void
+    {
+        $this->prefixes = $prefixes;
     }
 }
