@@ -37,8 +37,8 @@ class MessageCaster
             $expectedClass = '\\WildPHP\\Messages\\' . $verb;
         }
 
-        if (!class_exists($expectedClass)) {
-            throw new CastException('The class ' . $expectedClass . ' does not exist.');
+        if (!is_string($expectedClass) || !class_exists($expectedClass)) {
+            throw new CastException('The given message class does not exist.');
         }
 
         $reflection = new ReflectionClass($expectedClass);
