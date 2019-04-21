@@ -1,10 +1,6 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
-    <inspection_tool class="CheckEmptyScriptTag" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="CheckImageSize" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="CheckValidXmlInScriptTagBody" enabled="false" level="ERROR" enabled_by_default="false" />
-    <inspection_tool class="FixedTimeStartWithInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ForgottenDebugOutputInspection" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="configuration">
         <list>
@@ -70,41 +66,6 @@
       </option>
       <option name="migratedIntoUserSpace" value="true" />
     </inspection_tool>
-    <inspection_tool class="HtmlDeprecatedAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlDeprecatedTag" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlExtraClosingTag" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlFormInputWithoutLabel" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlMissingClosingTag" enabled="false" level="INFORMATION" enabled_by_default="false" />
-    <inspection_tool class="HtmlRequiredAltAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlRequiredLangAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlRequiredTitleElement" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlUnknownAnchorTarget" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlUnknownAttribute" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="myValues">
-        <value>
-          <list size="0" />
-        </value>
-      </option>
-      <option name="myCustomValuesEnabled" value="true" />
-    </inspection_tool>
-    <inspection_tool class="HtmlUnknownBooleanAttribute" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlUnknownTag" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="myValues">
-        <value>
-          <list size="6">
-            <item index="0" class="java.lang.String" itemvalue="nobr" />
-            <item index="1" class="java.lang.String" itemvalue="noembed" />
-            <item index="2" class="java.lang.String" itemvalue="comment" />
-            <item index="3" class="java.lang.String" itemvalue="noscript" />
-            <item index="4" class="java.lang.String" itemvalue="embed" />
-            <item index="5" class="java.lang.String" itemvalue="script" />
-          </list>
-        </value>
-      </option>
-      <option name="myCustomValuesEnabled" value="true" />
-    </inspection_tool>
-    <inspection_tool class="HtmlUnknownTarget" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="InvertedIfElseConstructsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="MessDetectorValidationInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="CODESIZE" value="true" />
       <option name="CONTROVERSIAL" value="true" />
@@ -112,7 +73,6 @@
       <option name="UNUSEDCODE" value="true" />
       <option name="NAMING" value="true" />
     </inspection_tool>
-    <inspection_tool class="OffsetOperationsInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PhpCSFixerValidationInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="CODING_STANDARD" value="PSR2" />
     </inspection_tool>
@@ -121,10 +81,6 @@
       <option name="EXTENSIONS" value="php,js,css,inc" />
     </inspection_tool>
     <inspection_tool class="PhpMissingStrictTypesDeclarationInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PhpStaticAsDynamicMethodCallInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="RequiredAttributes" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="myAdditionalRequiredHtmlAttributes" value="" />
-    </inspection_tool>
     <inspection_tool class="SecurityAdvisoriesInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="optionConfiguration">
         <list>
@@ -175,12 +131,6 @@
           <option value="zendframework/zend-test" />
         </list>
       </option>
-    </inspection_tool>
-    <inspection_tool class="SenselessCommaInArrayDefinitionInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
-      <option name="processCode" value="true" />
-      <option name="processLiterals" value="true" />
-      <option name="processComments" value="true" />
     </inspection_tool>
   </profile>
 </component>
