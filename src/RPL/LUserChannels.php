@@ -12,5 +12,5 @@ namespace WildPHP\Messages\RPL;
 
 class LUserChannels extends AbstractCount
 {
-    protected static $verb = '253';
+    protected static $verb = '254';
 }
