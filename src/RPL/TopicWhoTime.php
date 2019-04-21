@@ -57,7 +57,7 @@ class TopicWhoTime extends BaseIRCMessageImplementation implements IncomingMessa
         $object->setServer($server);
         $object->setChannel($channel);
         $object->setPrefix(Prefix::fromString($prefix));
-        $object->setTimestamp($timestamp);
+        $object->setTimestamp((int) $timestamp);
         $object->setTags($incomingMessage->getTags());
 
         return $object;

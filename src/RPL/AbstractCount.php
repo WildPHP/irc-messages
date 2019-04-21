@@ -44,10 +44,10 @@ abstract class AbstractCount extends BaseIRCMessageImplementation implements Inc
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() !== self::getVerb()) {
+        if ($incomingMessage->getVerb() !== static::getVerb()) {
             throw new InvalidArgumentException(sprintf(
                 'Expected incoming %s; got %s',
-                self::getVerb(),
+                static::getVerb(),
                 $incomingMessage->getVerb()
             ));
         }
