@@ -39,10 +39,10 @@ class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInt
      */
     public static function fromIncomingMessage(IrcMessageInterface $incomingMessage): self
     {
-        if ($incomingMessage->getVerb() !== self::getVerb()) {
+        if ($incomingMessage->getVerb() !== static::getVerb()) {
             throw new InvalidArgumentException(sprintf(
                 'Expected incoming %s; got %s',
-                self::getVerb(),
+                static::getVerb(),
                 $incomingMessage->getVerb()
             ));
         }
@@ -50,7 +50,7 @@ class Welcome extends BaseIRCMessageImplementation implements IncomingMessageInt
         [$nickname, $message] = $incomingMessage->getArgs();
         $server = $incomingMessage->getPrefix();
 
-        $object = new self();
+        $object = new static();
         $object->setNickname($nickname);
         $object->setServer($server);
         $object->setMessage($message);
