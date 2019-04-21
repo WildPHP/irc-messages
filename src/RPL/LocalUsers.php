@@ -51,7 +51,7 @@ class LocalUsers extends BaseIRCMessageImplementation implements IncomingMessage
             ));
         }
 
-        if (count($incomingMessage->getArgs() === 4)) {
+        if (count($incomingMessage->getArgs()) === 4) {
             [$nickname, $current, $maximum, $message] = $incomingMessage->getArgs();
         } else {
             [$nickname, $message] = $incomingMessage->getArgs();
@@ -63,8 +63,8 @@ class LocalUsers extends BaseIRCMessageImplementation implements IncomingMessage
         $object->setNickname($nickname);
         $object->setServer($server);
         $object->setMessage($message);
-        $object->setCurrentUsers($current ?? -1);
-        $object->setMaximumUsers($maximum ?? -1);
+        $object->setCurrentUsers((int) ($current ?? -1));
+        $object->setMaximumUsers((int) ($maximum ?? -1));
         $object->setTags($incomingMessage->getTags());
 
         return $object;
