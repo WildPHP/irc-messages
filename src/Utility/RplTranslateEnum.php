@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace WildPHP\Messages\Utility;
 
+use WildPHP\Messages\RPL\EndOfMotd;
 use WildPHP\Messages\RPL\EndOfNames;
 use WildPHP\Messages\RPL\ISupport;
+use WildPHP\Messages\RPL\Motd;
+use WildPHP\Messages\RPL\MotdStart;
 use WildPHP\Messages\RPL\NamReply;
 use WildPHP\Messages\RPL\Topic;
 use WildPHP\Messages\RPL\Welcome;
@@ -26,7 +29,10 @@ class RplTranslateEnum
         '332' => Topic::class,
         '353' => NamReply::class,
         '354' => WhosPcRpl::class,
-        '366' => EndOfNames::class
+        '366' => EndOfNames::class,
+        '372' => Motd::class,
+        '375' => MotdStart::class,
+        '376' => EndOfMotd::class
     ];
 
     /**
