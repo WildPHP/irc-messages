@@ -55,4 +55,12 @@ class MessageCasterTest extends TestCase
 
         $this->assertEquals($expected, $outcome);
     }
+
+    public function testCastNumericNonexistingVerbMessage()
+    {
+        $incoming = new IrcMessage('', '999', ['', '', '']);
+
+        $this->expectException(CastException::class);
+        MessageCaster::castMessage($incoming);
+    }
 }
