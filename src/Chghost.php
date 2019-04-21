@@ -10,6 +10,7 @@ namespace WildPHP\Messages;
 
 use InvalidArgumentException;
 use WildPHP\Messages\Generics\BaseIRCMessageImplementation;
+use WildPHP\Messages\Generics\Prefix;
 use WildPHP\Messages\Interfaces\IncomingMessageInterface;
 use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\PrefixTrait;
@@ -51,9 +52,11 @@ class Chghost extends BaseIRCMessageImplementation implements IncomingMessageInt
             ));
         }
 
+        $prefix = Prefix::fromIncomingMessage($incomingMessage);
         [$newUsername, $newHostname] = $incomingMessage->getArgs();
 
         $object = new self();
+        $object->setPrefix($prefix);
         $object->setNewUsername($newUsername);
         $object->setNewHostname($newHostname);
         $object->setTags($incomingMessage->getTags());
