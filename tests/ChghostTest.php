@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace WildPHP\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use WildPHP\Messages\Chghost;
 use WildPHP\Messages\Generics\IrcMessage;
