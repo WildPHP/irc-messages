@@ -18,7 +18,7 @@ class LUserChannelsTest extends TestCase
     public function testFromIncomingMessage(): void
     {
         $prefix = 'server';
-        $verb = '253';
+        $verb = '254';
         $args = ['nickname', '5', 'channels formed'];
         $incoming = new IrcMessage($prefix, $verb, $args);
         $rpl_welcome = LUserChannels::fromIncomingMessage($incoming);

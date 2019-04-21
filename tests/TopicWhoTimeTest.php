@@ -20,7 +20,7 @@ class TopicWhoTimeTest extends TestCase
     public function testFromIncomingMessage()
     {
         $prefix = 'server';
-        $verb = '315';
+        $verb = '333';
         $args = ['nickname', '#channel', 'nick!user@host', '5'];
         $incoming = new IrcMessage($prefix, $verb, $args);
         $rpl_welcome = TopicWhoTime::fromIncomingMessage($incoming);

@@ -27,7 +27,7 @@ class TopicWhoTime extends BaseIRCMessageImplementation implements IncomingMessa
     use ChannelTrait;
     use PrefixTrait;
 
-    protected static $verb = '315';
+    protected static $verb = '333';
 
     /**
      * @var int
