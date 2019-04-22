@@ -18,6 +18,7 @@ use WildPHP\Messages\Interfaces\IrcMessageInterface;
 use WildPHP\Messages\Traits\ChannelTrait;
 use WildPHP\Messages\Traits\NicknameTrait;
 use WildPHP\Messages\Traits\ServerTrait;
+use WildPHP\Messages\Utility\UserModeParser;
 
 /**
  * Class RPL_NAMREPLY
@@ -72,7 +73,9 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
 
         $prefixes = [];
         foreach ($nicknames as $key => $prefixString) {
-            $prefix = Prefix::fromString($prefixString);
+            $prefixStringNoModes = '';
+            UserModeParser::extractFromNickname($prefixString, $prefixStringNoModes);
+            $prefix = Prefix::fromString($prefixStringNoModes);
 
             // no nickname means this isn't a full prefix. do not try any further.
             if (empty($prefix->getNickname())) {
