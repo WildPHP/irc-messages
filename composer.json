@@ -3,12 +3,6 @@
   "description": "IRC messages implementation for WildPHP",
   "minimum-stability": "stable",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Yoshi2889",
-      "email": "rick@nanosector.nl"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "WildPHP\\Messages\\": "src/"
