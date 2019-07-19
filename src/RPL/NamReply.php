@@ -53,6 +53,13 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
     protected $prefixes = [];
 
     /**
+     * @var array
+     *
+     * Format: <nickname, array of mode strings>
+     */
+    protected $modes = [];
+
+    /**
      * @param IrcMessageInterface $incomingMessage
      *
      * @return self
@@ -72,15 +79,20 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
         $nicknames = explode(' ', $nicknames);
 
         $prefixes = [];
+        $modes = [];
         foreach ($nicknames as $key => $prefixString) {
             $prefixStringNoModes = '';
-            UserModeParser::extractFromNickname($prefixString, $prefixStringNoModes);
+            $userModes = UserModeParser::extractFromNickname($prefixString, $prefixStringNoModes);
             $prefix = Prefix::fromString($prefixStringNoModes);
 
             // no nickname means this isn't a full prefix. do not try any further.
             if (empty($prefix->getNickname())) {
-                break;
+                $modes[$prefixStringNoModes] = $userModes;
+                $nicknames[$key] = $prefixStringNoModes;
+                continue;
             }
+
+            $modes[$prefix->getNickname()] = $userModes;
 
             $prefixes[$prefix->getNickname()] = $prefix;
 
@@ -95,6 +107,7 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
         $object->setNicknames($nicknames);
         $object->setPrefixes($prefixes);
         $object->setServer($server);
+        $object->setModes($modes);
         $object->setTags($incomingMessage->getTags());
 
         return $object;
@@ -146,5 +159,21 @@ class NamReply extends BaseIRCMessageImplementation implements IncomingMessageIn
     public function setPrefixes(array $prefixes): void
     {
         $this->prefixes = $prefixes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getModes(): array
+    {
+        return $this->modes;
+    }
+
+    /**
+     * @param array $modes
+     */
+    public function setModes(array $modes): void
+    {
+        $this->modes = $modes;
     }
 }
