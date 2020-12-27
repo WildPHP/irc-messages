@@ -58,15 +58,22 @@ class MyInfo extends BaseIRCMessageImplementation implements IncomingMessageInte
             ));
         }
 
-        [$nickname, $server, $version, $userModes, $channelModes, $channelModesParam] = $incomingMessage->getArgs();
+        [
+          $nickname,
+          $server,
+          $version,
+          $userModes,
+          $channelModes,
+          $channelModesParam,
+        ] = $incomingMessage->getArgs() + [5 => ''];
 
         $object = new self();
         $object->setNickname($nickname);
         $object->setServer($server);
         $object->setVersion($version);
-        $object->setUserModes(str_split($userModes));
-        $object->setChannelModes(str_split($channelModes));
-        $object->setChannelModesWithParameter(str_split($channelModesParam));
+        $object->setUserModes(array_filter(str_split($userModes)));
+        $object->setChannelModes(array_filter(str_split($channelModes)));
+        $object->setChannelModesWithParameter(array_filter(str_split($channelModesParam)));
         $object->setTags($incomingMessage->getTags());
 
         return $object;
